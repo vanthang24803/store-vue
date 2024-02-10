@@ -21,12 +21,12 @@ const routes = [
         component: Home,
       },
       {
-        path: "/new-book",
+        path: "/collections/all",
         name: "newBook",
         component: NewBook,
       },
       {
-        path: "/manga",
+        path: "/collections/manga-comic",
         name: "manga",
         component: Manga,
       },

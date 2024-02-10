@@ -2,26 +2,33 @@
 import { RouterLink } from 'vue-router';
 import { formatPrice, price } from "@/lib/format";
 import { Button } from '@/components/ui/button'
-import { defineProps } from 'vue'
+import { ShoppingCart } from 'lucide-vue-next';
+import { useCartStore } from '@/store/cart';
 
 const props = defineProps({
     product: Object,
 });
+
+
+const cart = useCartStore();
+
 </script>
 
   
 <template>
-    <RouterLink :to="`/product/${product.id}`">
-        <div
-            class="w-full pb-4 bg-white rounded-md hover:shadow-md hover:cursor-pointer flex flex-col overflow-hidden group lg:h-[70vh] md:h-[60vh]">
+    <div>
+        <div class="w-full pb-4 bg-white rounded-md hover:shadow-md 
+            hover:cursor-pointer flex flex-col overflow-hidden group
+             lg:h-[72vh] relative">
             <img :src="product.thumbnail" :alt="product.name"
-                class="object-fill rounded-md hover:scale-105 transform transition-transform duration-500 p-2 ">
+                class="object-cover rounded-md hover:scale-105 h-[40vh] transform transition-transform duration-500 p-2 ">
 
             <div class="flex flex-col space-y-2 p-2">
                 <span class="text-neutral-500 font-medium text-sm">
                     {{ product.brand }}
                 </span>
-                <p class="font-medium text-sm line-clamp-2">{{ product.name }}</p>
+                <RouterLink :to="`/product/${product.id}`" class="font-medium text-sm line-clamp-2">{{ product.name }}
+                </RouterLink>
                 <span class="text-neutral-500 font-medium text-sm">
                     {{ product.options.length }} phiên bản
                 </span>
@@ -45,8 +52,27 @@ const props = defineProps({
                         </Button>
                     </div>
                 </div>
+                <div class="my-2 lg:absolute lg:bottom-4 flex items-center space-x-4"  @click="cart.addItem(product, product.options[0].id, 1)"
+                    v-if="product.options[0].quantity > 0">
+                    <div class="w-9 h-9 flex items-center justify-center bg-[#65b10d] rounded-full"
+                       >
+                        <ShoppingCart class="w-5 h-5" />
+                    </div>
+                    <span class="font-semibold text-[12px] uppercase">
+                        Thêm vào giỏ
+                    </span>
+                </div>
+
+                <div class="my-2 flex lg:absolute lg:bottom-4 items-center space-x-4" v-else>
+                    <div class="w-9 h-9 flex items-center justify-center bg-neutral-300/90 rounded-full cursor-not-allowed">
+                        <ShoppingCart class="w-5 h-5" />
+                    </div>
+                    <span class="font-semibold text-[12px] uppercase text-neutral-400 cursor-not-allowed">
+                        Hết hàng
+                    </span>
+                </div>
             </div>
         </div>
-    </RouterLink>
+    </div>
 </template>
   

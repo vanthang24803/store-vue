@@ -14,7 +14,7 @@ onMounted(async () => {
     const route = useRoute();
     try {
         isLoading.value = true;
-        const response = await axios.get(`http://localhost:6002/api/product/${route.params.id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product/${route.params.id}`);
         product.value = response.data;
     }
     catch (error) {

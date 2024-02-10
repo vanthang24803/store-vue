@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { formatPrice, price } from "@/lib/format";
 import { Minus, Plus, Link } from 'lucide-vue-next';
 import { useToast } from '@/components/ui/toast/use-toast'
-import { defineProps } from 'vue'
+import { useCartStore } from '@/store/cart';
 
 const props = defineProps({
     product: Object,
@@ -12,6 +12,8 @@ const props = defineProps({
 
 let option = ref(null);
 let total = ref(1);
+
+const cart = useCartStore();
 
 onMounted(() => {
     option.value = props.product?.options[0];
@@ -121,7 +123,7 @@ const copy = async (id) => {
                                 </Button>
                             </div>
                         </div>
-                        <Button>
+                        <Button @click="cart.addItem(product, option.id, total)">
                             Thêm vào giỏ hàng
                         </Button>
 

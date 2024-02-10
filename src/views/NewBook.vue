@@ -9,16 +9,16 @@ let isLoading = ref(false);
 let category = ref("Sách mới");
 
 onMounted(async () => {
-    try {
-        isLoading.value = true;
-        const response = await axios.get(`http://localhost:6002/api/product?Category=${category.value}`);
-        products.value = response.data;
-    }
-    catch (error) {
-        console.error(error);
-    } finally {
-        isLoading.value = false;
-    }
+  try {
+    isLoading.value = true;
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product?Category=${category.value}`);
+    products.value = response.data;
+  }
+  catch (error) {
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
 });
 </script>
 
