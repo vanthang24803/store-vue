@@ -23,7 +23,7 @@ const store = useCartStore();
 const selectedFilter = ref(null);
 const selectedPrice = ref(null)
 
-let category = 'Manga'; 
+let category = "Tiểu Thuyết";
 
 watch(selectedFilter, (newFilter) => {
    store.updateState(null, newFilter , category);
@@ -68,7 +68,7 @@ store.updateState(null , null , category);
          </div>
 
          <div className="flex flex-col space-y-4">
-            <img src="https://file.hstatic.net/200000294254/collection/banner_danh_muc_homepage___collection_1920x580px__truyen_tranh__ebacebcd2b134638a9179a96f7b4af29.jpg" alt="billboard"
+            <img  src="https://file.hstatic.net/200000294254/collection/banner_danh_muc_homepage___collection_1920x580px__tieu_thuyet__8c8d0f4a2511417b8ce2191535c34a8a.jpg" alt="billboard"
                className="rounded-md" />
 
             <div className="flex space-y-2 flex-col">

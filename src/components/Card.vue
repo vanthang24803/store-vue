@@ -19,9 +19,9 @@ const cart = useCartStore();
     <div>
         <div class="w-full pb-4 bg-white rounded-md hover:shadow-md 
             hover:cursor-pointer flex flex-col overflow-hidden group
-             lg:h-[72vh] relative">
+             lg:h-[72vh] h-[55vh] md:h-[65vh] relative">
             <img :src="product.thumbnail" :alt="product.name"
-                class="object-cover rounded-md hover:scale-105 h-[40vh] transform transition-transform duration-500 p-2 ">
+                class="object-cover rounded-md hover:scale-105 lg:h-[40vh] transform transition-transform duration-500 p-2 ">
 
             <div class="flex flex-col space-y-2 p-2">
                 <span class="text-neutral-500 font-medium text-sm">
@@ -63,7 +63,7 @@ const cart = useCartStore();
                     </span>
                 </div>
 
-                <div class="my-2 flex lg:absolute lg:bottom-4 items-center space-x-4" v-else>
+                <div class="my-2 flex absolute bottom-4 items-center space-x-4" v-else>
                     <div class="w-9 h-9 flex items-center justify-center bg-neutral-300/90 rounded-full cursor-not-allowed">
                         <ShoppingCart class="w-5 h-5" />
                     </div>

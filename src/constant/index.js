@@ -111,7 +111,6 @@ export const categories = [
   },
 ];
 
-
 export const menubar = [
   {
     title: "Tất cả",
@@ -146,3 +145,45 @@ export const menubar = [
     href: "/tra-cuu",
   },
 ];
+
+export const selects = [
+  {
+    value: "LowToHigh",
+    name: "Giá: Tăng dần",
+  },
+  {
+    value: "HighToLow",
+    name: "Giá: Giảm dần",
+  },
+  {
+    value: "Alphabet",
+    name: "Tên: A - Z",
+  },
+  {
+    value: "ReverseAlphabet",
+    name: "Tên: Z - A",
+  },
+  {
+    value: "Lasted",
+    name: "Mới nhất",
+  },
+  {
+    value: "Oldest",
+    name: "Cũ nhất",
+  },
+];
+
+export const price = [
+  {
+    name: "Dưới 100.000₫",
+    value: "Low",
+  },
+  { name: "100.000₫ - 200.000₫", value: "Medium" },
+  { name: "200.000₫ - 300.000₫", value: "High" },
+  { name: "300.000₫ - 400.000₫", value: "Highest" },
+  {
+    name: "Trên 400.000₫",
+    value: "Max",
+  },
+];
+

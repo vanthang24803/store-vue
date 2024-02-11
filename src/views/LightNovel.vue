@@ -23,7 +23,7 @@ const store = useCartStore();
 const selectedFilter = ref(null);
 const selectedPrice = ref(null)
 
-let category = 'Manga'; 
+let category = 'Light Novel'; 
 
 watch(selectedFilter, (newFilter) => {
    store.updateState(null, newFilter , category);
@@ -68,7 +68,7 @@ store.updateState(null , null , category);
          </div>
 
          <div className="flex flex-col space-y-4">
-            <img src="https://file.hstatic.net/200000294254/collection/banner_danh_muc_homepage___collection_1920x580px__truyen_tranh__ebacebcd2b134638a9179a96f7b4af29.jpg" alt="billboard"
+            <img  src="https://file.hstatic.net/200000294254/collection/banner_danh_muc_homepage___collection_1920x580px__light_novel__ce3fdb87f20a4423bca39b43a57eb2e9.jpg" alt="billboard"
                className="rounded-md" />
 
             <div className="flex space-y-2 flex-col">

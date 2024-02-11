@@ -2,6 +2,7 @@
 import { ShoppingBag } from 'lucide-vue-next';
 import { useCartStore } from '@/store/cart';
 import { price, formatPrice } from "@/lib/format"
+import UpdateCart from './UpdateCart.vue';
 
 import {
     Sheet,
@@ -46,27 +47,32 @@ const cart = useCartStore();
                         class="flex flex-col space-y-4 mb-4 text-sm hover:cursor-pointer">
                         <div class="flex space-x-4">
                             <img :src="item.product.thumbnail" :alt="item.product.name" class="w-[25%] object-cover" />
-                            <div className="flex flex-col">
-                                <div className="flex items-center space-x-5">
-                                    <span className="text-xs text-muted-foreground line-clamp-2">
+                            <div class="flex flex-col">
+                                <div class="flex items-start justify-between">
+                                    <span
+                                        class="text-xs text-muted-foreground line-clamp-2 flex-grow min-w-0 overflow-hidden text-overflow-ellipsis">
                                         {{ item.product.name }}
                                     </span>
-                                    <X className="w-1 h-1" @click="cart.removeItem(
+                                    <X class="w-4 h-4" @click="cart.removeItem(
                                         item.product.id,
                                         item.product.options[0].id
                                     )" />
                                 </div>
-                                <span className="text-neutral-400 text-[12px]">
-                                            {{ item.product.options[0].name }}
+                                <span class="text-neutral-400 text-[12px]">
+                                    {{ item.product.options[0].name }}
                                 </span>
-                                <div className="flex items-center space-x-5">
-                                    <span className="font-semibold ">
+                                <div class="flex items-center justify-between my-2">
+                                    <UpdateCart :product-id="item.product.id" :optionId="item.product.options[0].id"
+                                        :quantity="item.quantity" />
+                                </div>
+                                <div class="flex items-center space-x-5">
+                                    <span class="font-semibold">
                                         {{ formatPrice(
                                             item.product.options[0].price,
                                             item.product.options[0].sale
                                         ) }}₫
                                     </span>
-                                    <span className="text-[12px] line-through hidden md:block">
+                                    <span v-if="item.product.options[0].sale > 0" class="text-[12px] line-through hidden md:block">
                                         {{ price(item.product.options[0].price) }}₫
                                     </span>
                                 </div>
@@ -75,9 +81,9 @@ const cart = useCartStore();
                     </div>
                 </ScrollArea>
                 <Separator />
-                <div className="flex items-center justify-between">
-                    <span className="text-lg font-semibold uppercase">Tổng tiền:</span>
-                    <span className="font-bold text-rose-500">
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-semibold uppercase">Tổng tiền:</span>
+                    <span class="font-bold text-rose-500">
                         {{ cart.totalPrice }}
                     </span>
                 </div>

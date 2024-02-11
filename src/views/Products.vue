@@ -23,27 +23,26 @@ const store = useCartStore();
 const selectedFilter = ref(null);
 const selectedPrice = ref(null)
 
-let category = 'Manga'; 
 
 watch(selectedFilter, (newFilter) => {
-   store.updateState(null, newFilter , category);
+   store.updateState(null, newFilter);
 });
 
 const updateState = (item) => {
-   store.updateState(item, selectedFilter , category)
+   store.updateState(item, selectedFilter)
    selectedPrice.value = item;
 }
 
 const updateSelect = () => {
-   store.updateState(selectedPrice.value, selectedFilter , category)
+   store.updateState(selectedPrice.value, selectedFilter)
 }
 
 
 const handleReset = () => {
-   store.updateState(null , null , category);
+   store.updateState();
 }
 
-store.updateState(null , null , category);
+store.updateState();
 
 </script>
 
@@ -53,7 +52,7 @@ store.updateState(null , null , category);
       <div className="flex items-center space-x-3 text-sm font-medium">
          <RouterLink to="/">Trang chủ</RouterLink>
          <ChevronRight class="w-4 h-4" />
-         <span>{{ category }}</span>
+         <span>Tất cả sản phẩm</span>
       </div>
       <div className=" lg:flex w-full lg:space-x-12">
          <div className="hidden lg:flex lg:flex-row flex-col space-y-4 lg:space-y-0 my-4">
@@ -68,7 +67,7 @@ store.updateState(null , null , category);
          </div>
 
          <div className="flex flex-col space-y-4">
-            <img src="https://file.hstatic.net/200000294254/collection/banner_danh_muc_homepage___collection_1920x580px__truyen_tranh__ebacebcd2b134638a9179a96f7b4af29.jpg" alt="billboard"
+            <img src="https://theme.hstatic.net/200000294254/1001077164/14/collection_banner.jpg?v=323" alt="billboard"
                className="rounded-md" />
 
             <div className="flex space-y-2 flex-col">

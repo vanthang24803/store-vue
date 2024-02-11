@@ -5,6 +5,8 @@ import Card from '@/components/Card.vue';
 import Spinner from "@/components/Spinner.vue";
 import Billboard from '@/components/Billboard.vue';
 import Button from '@/components/ui/button/Button.vue';
+import Container from '@/components/ui/Container.vue';
+import Categories from '@/components/Categories.vue';
 
 let products = ref([]);
 let isProductLoading = ref(false);
@@ -41,27 +43,26 @@ onMounted(async () => {
 
 
 <template>
-  <div class="my-12 py-6 px-4 bg-neutral-100/90">
-    <div class="lg:container">
-      <div class="w-full rounded-md flex items-center justify-center border-neutral-400 min-h-[20vh]">
-        <Spinner v-if="isBillboardLoading" />
-        <Billboard :billboards="billboards" v-else />
-      </div>
-      <div class="flex flex-col space-y-4">
-        <h2 class="text-2xl font-bold tracking-tight uppercase mt-8 lg:mt-0">Sản phẩm mới cập nhật</h2>
-        <div>
-          <Spinner v-if="isProductLoading" />
-          <div class="flex items-center justify-center flex-col space-y-8" v-else>
-            <div class="grid lg:grid-cols-6 grid-cols-2 gap-4">
-              <Card v-for="product in products" :key="product.id" :product="product" />
-            </div>
-
-            <Button size="lg">Xem Thêm</Button>
+  <Container>
+    <div class="w-full rounded-md flex items-center justify-center border-neutral-400 min-h-[20vh]">
+      <Spinner v-if="isBillboardLoading" />
+      <Billboard :billboards="billboards" v-else />
+    </div>
+    <Categories />
+    <div class="flex flex-col space-y-4">
+      <h2 class="text-2xl font-bold tracking-tight uppercase mt-8 lg:mt-0">Sản phẩm mới cập nhật</h2>
+      <div>
+        <Spinner v-if="isProductLoading" />
+        <div class="flex items-center justify-center flex-col space-y-8" v-else>
+          <div class="grid lg:grid-cols-6 grid-cols-2 gap-4">
+            <Card v-for="product in products" :key="product.id" :product="product" />
           </div>
+
+          <Button size="lg">Xem Thêm</Button>
         </div>
       </div>
     </div>
-  </div>
+  </Container>
 </template>
 
 
