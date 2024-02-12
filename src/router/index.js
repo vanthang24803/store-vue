@@ -24,6 +24,9 @@ const routes = [
         path: "/",
         name: "home",
         component: Home,
+        meta: {
+          title : "AMAK Store"
+        }
       },
       {
         path: "/collections/all",
@@ -34,6 +37,7 @@ const routes = [
         path: "/collections/manga-comic",
         name: "manga",
         component: Manga,
+       
       },
       {
         path: "/collections/light-novel",

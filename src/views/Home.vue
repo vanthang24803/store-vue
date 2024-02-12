@@ -50,7 +50,7 @@ onMounted(async () => {
     </div>
     <Categories />
     <div class="flex flex-col space-y-4">
-      <h2 class="text-2xl font-bold tracking-tight uppercase mt-8 lg:mt-0">Sản phẩm mới cập nhật</h2>
+      <h2 class="text-2xl font-bold tracking-tight uppercase  lg:mt-0">Sản phẩm mới cập nhật</h2>
       <div>
         <Spinner v-if="isProductLoading" />
         <div class="flex items-center justify-center flex-col space-y-8" v-else>

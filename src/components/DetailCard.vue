@@ -29,7 +29,7 @@ const handleOptionChange = (id) => {
 const copy = async (id) => {
     try {
         await navigator.clipboard.writeText(
-            `http://localhost:5173/product/${id}` || ""
+            `${import.meta.env.VITE_MAIN_URL}/product/${id}` || ""
         );
 
         toast({
