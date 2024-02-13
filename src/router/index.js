@@ -10,8 +10,11 @@ import LightNovel from "@/views/LightNovel.vue";
 import TieuThuyet from "@/views/TieuThuyet.vue";
 import KyNang from "@/views/KyNang.vue";
 import PhuKien from "@/views/PhuKien.vue";
+import Order from "@/views/Order.vue";
+import TraCuu from "@/views/TraCuu.vue";
 
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
+import ActionLayout from "@/layouts/ActionLayout.vue";
 
 const routes = [
   {
@@ -25,8 +28,8 @@ const routes = [
         name: "home",
         component: Home,
         meta: {
-          title : "AMAK Store"
-        }
+          title: "AMAK Store",
+        },
       },
       {
         path: "/collections/all",
@@ -37,7 +40,6 @@ const routes = [
         path: "/collections/manga-comic",
         name: "manga",
         component: Manga,
-       
       },
       {
         path: "/collections/light-novel",
@@ -68,6 +70,20 @@ const routes = [
         path: "/product/:id",
         name: "detail",
         component: Detail,
+      },
+    ],
+  },
+  {
+    path: "/",
+    component: ActionLayout,
+    children: [
+      {
+        path: "/checkout/:id",
+        component: Order,
+      },
+      {
+        path: "/tra-cuu",
+        component: TraCuu,
       },
     ],
   },

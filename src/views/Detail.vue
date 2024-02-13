@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted , watch } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 import Spinner from "@/components/Spinner.vue"
@@ -8,23 +8,35 @@ import { ChevronRight } from 'lucide-vue-next';
 import DetailCard from '@/components/DetailCard.vue';
 import Introduce from '@/components/Introduce.vue';
 import Suggest from "@/components/Suggest.vue"
+import { useHead } from '@unhead/vue'
+
 
 const product = ref(null);
 const isLoading = ref(false);
+const route = useRoute();
 
-onMounted(async () => {
-    const route = useRoute();
+const fetchProduct = async () => {
     try {
         isLoading.value = true;
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product/${route.params.id}`);
         product.value = response.data;
+        
+        useHead({
+            title: `${product.value.name} | AMAK Store`
+        });
     }
     catch (error) {
         console.error(error);
     } finally {
         isLoading.value = false;
     }
-});
+};
+
+onMounted(fetchProduct);
+
+watch(() => route.params.id, fetchProduct);
+
+
 </script>
 
 
@@ -37,16 +49,16 @@ onMounted(async () => {
                     <div class="hidden md:flex items-center text-sm space-x-4 text-neutral-800 hover:cursor-pointer">
                         <RouterLink to="/">Trang chủ</RouterLink>
                         <ChevronRight :size="20" />
-                        <RouterLink to="/">Sách mới</RouterLink>
+                        <RouterLink to="/collections/sach-moi">Sách mới</RouterLink>
                         <ChevronRight :size="20" />
                         <span>{{ product.name }}</span>
                     </div>
 
                     <DetailCard :product="product" />
                     <Introduce v-if="product.information" :data="product.information" />
-                    
+
                     <Suggest :category="product.categories[0].name" />
-                    
+
                 </div>
             </div>
         </div>

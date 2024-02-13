@@ -1,0 +1,9 @@
+<script setup>
+import { RouterLink } from 'vue-router';
+</script>
+
+<template>
+    <RouterLink to="/">
+        <img src="../assets/logo.png" alt="logo" className="w-auto h-10 object-cover">
+    </RouterLink>
+</template>

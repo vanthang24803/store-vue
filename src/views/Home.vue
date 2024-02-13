@@ -7,6 +7,7 @@ import Billboard from '@/components/Billboard.vue';
 import Button from '@/components/ui/button/Button.vue';
 import Container from '@/components/ui/Container.vue';
 import Categories from '@/components/Categories.vue';
+import { useHead } from '@unhead/vue'
 
 let products = ref([]);
 let isProductLoading = ref(false);
@@ -38,6 +39,10 @@ onMounted(async () => {
     isBillboardLoading.value = false;
   }
 });
+
+useHead({
+  title: 'AMAK BOOKS | Sách là bạn'
+})
 
 </script>
 

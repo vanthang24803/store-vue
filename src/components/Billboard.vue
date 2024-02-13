@@ -5,6 +5,7 @@ const props = defineProps({
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
+import Autoplay from 'embla-carousel-autoplay'
 
 </script>
 
@@ -12,7 +13,11 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
     <Carousel class="relative w-full" :opts="{
         align: 'start',
         loop: true,
-    }">
+    }" 
+    :plugins="[Autoplay({
+    delay: 2000,
+    })]"
+    >
         <CarouselContent>
             <CarouselItem v-for="(item, index) in billboards" :key="index" class="w-full rounded-md">
                 <AspectRatio :ratio="16 / 9" class="bg-muted">

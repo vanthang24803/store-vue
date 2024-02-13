@@ -1,14 +1,3 @@
-export const navbar = [
-  {
-    name: "Sách mới",
-    link: "/collections/all",
-  },
-  {
-    name: "Manga",
-    link: "/collections/manga-comic",
-  },
-];
-
 export const info = {
   title: "AMAK Store",
   address: "AMAK Store, Đường Abc, Hà Nội",
@@ -187,3 +176,9 @@ export const price = [
   },
 ];
 
+export const statusList = {
+  PENDING: "Chờ xác nhận",
+  CREATE: "Khởi tạo thành công",
+  SHIPPING: "Đơn hàng đang trên đường giao",
+  SUCCESS: "Giao hàng thành công",
+};

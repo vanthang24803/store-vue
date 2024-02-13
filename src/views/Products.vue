@@ -18,6 +18,7 @@ import Card from "@/components/Card.vue";
 import PriceFilter from "@/components/PriceFilter.vue";
 
 import { RouterLink } from "vue-router";
+import { useHead } from '@unhead/vue'
 
 const store = useCartStore();
 const selectedFilter = ref(null);
@@ -43,6 +44,12 @@ const handleReset = () => {
 }
 
 store.updateState();
+
+
+useHead({
+  title: 'Tất cả sản phẩm | AMAK Store'
+})
+
 
 </script>
 

@@ -30,16 +30,16 @@ const handlePlus = () => {
 </script>
 
 <template>
-    <div className="flex space-x-2 items-center">
-        <Button className="w-6 h-6" variant="outline" @click="handleMinus">
+    <div class="flex space-x-2 items-center">
+        <Button class="w-7 h-7" variant="outline" @click="handleMinus">
             -
         </Button>
 
-        <Button disabled className="w-8 h-8" variant="ghost">
+        <Button disabled class="w-8 h-8" variant="ghost">
             {{ total }}
         </Button>
 
-        <Button className="w-6 h-6" variant="outline" @click="handlePlus">
+        <Button class="w-7 h-7" variant="outline" @click="handlePlus">
             +
         </Button>
     </div>

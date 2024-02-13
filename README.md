@@ -20,6 +20,7 @@ com/">Tailwindcss</a>  Â·  <a href="https://www.shadcn-vue.com//">Vue-cnUI</a> Â
 To run this project, you will need to add the following environment variables to your .env file
 
 `VITE_API_URL`
+`VITE_MAIN_URL`
 
 ## Run Locally
 

@@ -18,6 +18,7 @@ import Card from "@/components/Card.vue";
 import PriceFilter from "@/components/PriceFilter.vue";
 
 import { RouterLink } from "vue-router";
+import { useHead } from '@unhead/vue'
 
 const store = useCartStore();
 const selectedFilter = ref(null);
@@ -45,12 +46,16 @@ const handleReset = () => {
 
 store.updateState(null, null, category);
 
+useHead({
+  title: 'Kỹ năng | AMAK Store'
+})
+
 </script>
 
 
 <template>
     <Container>
-        <div className="flex items-center space-x-3 text-sm font-medium">
+        <div className="flex items-center space-x-3 text-sm font-medium my-4">
             <RouterLink to="/">Trang chủ</RouterLink>
             <ChevronRight class="w-4 h-4" />
             <span>{{ category }}</span>

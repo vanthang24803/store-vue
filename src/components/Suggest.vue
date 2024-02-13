@@ -1,5 +1,6 @@
 <script setup>
 import { useCartStore } from "@/store/filter.js";
+import Autoplay from 'embla-carousel-autoplay'
 import {
     Carousel, CarouselContent, CarouselItem,
     CarouselNext, CarouselPrevious
@@ -20,7 +21,9 @@ store.updateState(null, null, props.category);
 <template>
     <div class="flex flex-col space-y-4 md:space-y-4 my-6">
         <span class="text-2xl font-bold">Sản phẩm liên quan</span>
-        <Carousel :opts="{ align: 'start', loop: true }" class="w-full">
+        <Carousel :opts="{ align: 'start', loop: true }" :plugins="[Autoplay({
+            delay: 2000,
+        })]" class="w-full">
             <CarouselContent>
                 <CarouselItem v-for="(item, index) in store.products.slice(0, 10)" :key="index"
                     class="basis-1/2 lg:basis-1/5">
