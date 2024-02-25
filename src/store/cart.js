@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useToast } from "@/components/ui/toast/use-toast";
-import { price } from "@/lib/format"
+import { price } from "@/lib/format";
 
 const { toast } = useToast();
 
@@ -56,4 +56,5 @@ export const useCartStore = defineStore("cart", {
       this.items = [];
     },
   },
+  persist: true,
 });

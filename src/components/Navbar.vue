@@ -14,7 +14,7 @@ import Menu from "./Menu.vue";
         <div className="md:max-w-screen-xl mx-auto flex items-center w-full justify-between">
             <div className="flex items-center space-x-8">
                 <Logo />
-                <div class="flex items-center space-x-8">
+                <div class="md:flex items-center space-x-8 hidden">
                     <Menubar />
                 </div>
             </div>

@@ -9,7 +9,7 @@ import { createHead } from '@unhead/vue'
 
 const head = createHead()
 
-const pinia = createPinia();
+const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
 createApp(App).use(head).use(router).use(pinia).mount("#app");

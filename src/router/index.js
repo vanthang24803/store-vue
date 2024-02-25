@@ -12,6 +12,7 @@ import KyNang from "@/views/KyNang.vue";
 import PhuKien from "@/views/PhuKien.vue";
 import Order from "@/views/Order.vue";
 import TraCuu from "@/views/TraCuu.vue";
+import Cart from "@/views/Cart.vue";
 
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import ActionLayout from "@/layouts/ActionLayout.vue";
@@ -65,6 +66,10 @@ const routes = [
         path: "/collections/phu-kien",
         name: "phu-kien",
         component: PhuKien,
+      },
+      {
+        path: "/cart",
+        component: Cart,
       },
       {
         path: "/product/:id",
