@@ -14,6 +14,7 @@ import Order from "@/views/Order.vue";
 import TraCuu from "@/views/TraCuu.vue";
 import Cart from "@/views/Cart.vue";
 import Checkout from "@/views/Checkout.vue";
+import SearchPage from "@/views/SearchPage.vue";
 
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import ActionLayout from "@/layouts/ActionLayout.vue";
@@ -32,6 +33,10 @@ const routes = [
         meta: {
           title: "AMAK Store",
         },
+      },
+      {
+        path: "/search",
+        component: SearchPage,
       },
       {
         path: "/collections/all",
