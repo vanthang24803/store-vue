@@ -86,19 +86,7 @@ useHead({
       </span>
     </div>
     <Spinner v-show="loading" />
-    <div v-if="error">
-      <div class="flex items-center justify-center flex-col space-y-4">
-        <img
-          src="https://media0.giphy.com/media/cLGoLxqA0dXe4Ndvtk/giphy.gif?cid=ecf05e47l5qho2ho9rfpuwz0rys2mem236plsw93zd620nf4&ep=v1_gifs_related&rid=giphy.gif&ct=s"
-          alt="thumbail" class="w-1/2" />
-        <h2 class="text-xl font-semibold capitalize">
-          Đơn hàng không tồn tại !
-        </h2>
-        <Button class="w-full" variant="secondary" @click="reset">
-          Thoát
-        </Button>
-      </div>
-    </div>
+    
     <div v-if="order">
       <div class="flex flex-col space-y-2">
         <div class="flex space-x-2">

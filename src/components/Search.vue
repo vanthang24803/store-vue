@@ -5,6 +5,7 @@ import { Search } from 'lucide-vue-next';
 import { Input } from '@/components/ui/input';
 import { formatPrice } from "@/lib/format"
 import { RouterLink } from 'vue-router';
+import { Separator } from './ui/separator';
 
 const content = ref('');
 const product = ref([]);
@@ -25,7 +26,7 @@ const handleInputChange = async (e) => {
 </script>
 
 <template>
-    <div class="relative md:block hidden dark:border-white group" ref="ref">
+    <div class="relative md:block hidden dark:border-white group drop-shadow-xl" ref="ref">
         <Input class="lg:w-[500px] md:w-[300px] h-10 font-medium" @input="handleInputChange"
             placeholder="Tìm kiếm sản phẩm..." />
         <div
@@ -52,6 +53,10 @@ const handleInputChange = async (e) => {
                             <img :src="item.thumbnail" :alt="item.name" className="w-[8%]" />
                         </RouterLink>
                     </div>
+                    <Separator />
+                    <RouterLink :to ="`/search/?product=${content}`" v-if="product.length > 5" class="flex items-center justify-center pt-1">
+                        Xem thêm  {{ product.length - 5 }} sản phẩm
+                    </RouterLink>
                 </div>
             </div>
         </div>

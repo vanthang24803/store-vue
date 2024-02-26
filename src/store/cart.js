@@ -36,13 +36,17 @@ export const useCartStore = defineStore("cart", {
         this.items.push({ product, optionId, quantity });
       }
       toast({
-        title: "Success",
+        title: "Đã thêm vào giỏ",
       });
     },
     removeItem(productId, optionId) {
       this.items = this.items.filter(
         (i) => i.product.id !== productId || i.optionId !== optionId
       );
+
+      toast({
+        title: "Đã xóa khỏi giỏ",
+      });
     },
     updateQuantity(productId, optionId, quantity) {
       const item = this.items.find(

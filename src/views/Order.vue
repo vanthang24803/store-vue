@@ -9,6 +9,11 @@ import { format } from "date-fns";
 import { statusList } from '@/constant';
 import { Button } from '@/components/ui/button'
 import Spinner from '@/components/Spinner.vue';
+import { useToast } from '@/components/ui/toast/use-toast'
+import confetti from 'canvas-confetti';
+
+
+const { toast } = useToast();
 
 let isLoading = ref(false);
 let order = ref();
@@ -21,6 +26,7 @@ onMounted(async () => {
         isLoading.value = true;
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/order/${route.params.id}`);
         order.value = response.data;
+        confetti();
     }
     catch (error) {
         console.error(error);
@@ -31,10 +37,14 @@ onMounted(async () => {
 
 const onCopy = () => {
     navigator.clipboard.writeText(route.params.id);
+    toast({
+        description: 'Mã vận đơn đã được copy !',
+    })
+
 };
 
 useHead({
-  title: 'Đơn hàng | AMAK Store'
+    title: 'Đơn hàng | AMAK Store'
 })
 
 </script>
@@ -42,11 +52,11 @@ useHead({
 <template>
     <Modal>
         <div v-if="order">
-            <h1 className="text-xl font-bold text-center uppercase">Chúc Mừng</h1>
-            <span className="text-center text-sm">
+            <h1 className="text-2xl font-bold text-center uppercase tracking-tighter">Chúc Mừng</h1>
+            <span className="flex items-center justify-center text-[14px] mt-4">
                 Đơn hàng của bạn đã được đặt thành công!
             </span>
-            <div className="flex flex-col space-y-2  pt-4">
+            <div className="flex flex-col space-y-1  pt-4">
                 <div className="flex space-x-2">
                     <span>Mã đơn hàng:</span>
                     <span className="font-medium hover:cursor-pointer text-sm md:text-base overflow-auto line-clamp-1"
@@ -91,7 +101,7 @@ useHead({
                             - {{ item.name }} - {{ item.option }} x{{ item.quantity }}</p>
                     </div>
                 </div>
-                <Button  @click="() => router.push({ path: '/' })">
+                <Button @click="() => router.push({ path: '/' })">
                     Trang chủ
                 </Button>
             </div>
