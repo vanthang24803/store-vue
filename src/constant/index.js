@@ -184,3 +184,19 @@ export const statusList = {
 };
 
 export const codPrice = 35000;
+
+export const CheckboxType = ["send", "store"];
+export const PaymentType = [
+  {
+    type: "cod",
+    name: "Thanh toán khi giao hàng (COD)",
+  },
+  {
+    type: "bank",
+    name: "Chuyển khoản qua ngân hàng",
+  },
+  {
+    type: "momo",
+    name: "Ví MoMo",
+  },
+];
