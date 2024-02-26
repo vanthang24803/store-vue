@@ -182,3 +182,5 @@ export const statusList = {
   SHIPPING: "Đơn hàng đang trên đường giao",
   SUCCESS: "Giao hàng thành công",
 };
+
+export const codPrice = 35000;

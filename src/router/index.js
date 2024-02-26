@@ -13,6 +13,7 @@ import PhuKien from "@/views/PhuKien.vue";
 import Order from "@/views/Order.vue";
 import TraCuu from "@/views/TraCuu.vue";
 import Cart from "@/views/Cart.vue";
+import Checkout from "@/views/Checkout.vue";
 
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import ActionLayout from "@/layouts/ActionLayout.vue";
@@ -91,6 +92,10 @@ const routes = [
         component: TraCuu,
       },
     ],
+  },
+  {
+    path: "/check-out",
+    component: Checkout,
   },
   {
     path: "/:pathMatch(.*)*",
