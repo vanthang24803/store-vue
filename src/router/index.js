@@ -15,6 +15,7 @@ import TraCuu from "@/views/TraCuu.vue";
 import Cart from "@/views/Cart.vue";
 import Checkout from "@/views/Checkout.vue";
 import SearchPage from "@/views/SearchPage.vue";
+import Login from "@/views/Login.vue";
 
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import ActionLayout from "@/layouts/ActionLayout.vue";
@@ -95,6 +96,10 @@ const routes = [
       {
         path: "/tra-cuu",
         component: TraCuu,
+      },
+      {
+        path: "login",
+        component: Login,
       },
     ],
   },
