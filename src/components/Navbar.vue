@@ -52,7 +52,7 @@ const router = useRouter();
                                 <User class="w-4 h-4 mr-2" />
                                 <span>Trang cá nhân</span>
                             </DropdownMenuItem>
-                            <DropdownMenuItem @click="router.push({ path: `profile/${auth.user.id}/order` })">
+                            <DropdownMenuItem @click="router.push({ path: `profile/${auth.user.id}/orders` })">
                                 <ShoppingCart class="w-4 h-4 mr-2" />
                                 <span>Đơn hàng của bạn</span>
                             </DropdownMenuItem>

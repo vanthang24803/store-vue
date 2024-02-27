@@ -1,5 +1,6 @@
 <script setup>
 import axios from 'axios';
+import { useHead } from '@unhead/vue'
 import { ref, watchEffect, onMounted } from 'vue';
 import { useForm } from 'vee-validate'
 import { useAuthStore } from '@/store/auth';
@@ -7,6 +8,7 @@ import { useRouter, useRoute } from 'vue-router';
 import Container from '@/components/ui/Container.vue';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import ProfileBar from '@/components/ProfileBar.vue';
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -53,6 +55,8 @@ const fetchData = async () => {
          { headers: { Authorization: `Bearer ${auth.token}` } }
       );
       profile.value = response.data;
+
+
    }
    catch (error) {
       console.error(error);
@@ -69,8 +73,13 @@ watchEffect(() => {
          lastName: profile.value.lastName,
          address: profile.value.address,
       });
+
+      useHead({
+         title: `Trang cá nhân -  ${profile.value.firstName} ${profile.value.lastName}`
+      })
    }
 });
+
 
 
 const handleUpdate = () => {
@@ -110,6 +119,7 @@ const onSubmit = form.handleSubmit(async (values) => {
    }
 })
 
+
 </script>
 
 <template>
@@ -121,23 +131,7 @@ const onSubmit = form.handleSubmit(async (values) => {
          </div>
 
          <div class="flex flex-col lg:flex-row  md:px-12 px-4 space-y-4 lg:space-y-0">
-            <div class="flex flex-col space-y-4 lg:basis-1/4">
-               <h2 class="uppercase font-semibold tracking-tight">
-                  TÀI KHOẢN
-               </h2>
-               <RouterLink :to="`${auth.user.id}`" class="hover:text-[#417505] font-medium text-sm">Thông tin tài khoản
-               </RouterLink>
-
-               <RouterLink :to="`${auth.user.id}/address`" class="hover:text-[#417505] font-medium text-sm">Địa chỉ
-               </RouterLink>
-
-               <RouterLink :to="`${auth.user.id}/orders`" class="hover:text-[#417505] font-medium text-sm">Đơn hàng
-               </RouterLink>
-
-               <span class="hover:text-[#417505] font-medium text-sm hover:cursor-pointer" @click="auth.logout">
-                  Đăng xuất
-               </span>
-            </div>
+            <ProfileBar />
 
             <div class="flex flex-col space-y-4 w-full bg-white p-4 rounded-md">
                <h2 class="uppercase font-semibold tracking-tight">

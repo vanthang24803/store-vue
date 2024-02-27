@@ -17,6 +17,7 @@ import Checkout from "@/views/Checkout.vue";
 import SearchPage from "@/views/SearchPage.vue";
 import Login from "@/views/Login.vue";
 import Profile from "@/views/Profile.vue";
+import ProfileOrder from "@/views/ProfileOrder.vue";
 
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import ActionLayout from "@/layouts/ActionLayout.vue";
@@ -39,6 +40,10 @@ const routes = [
       {
         path: "profile/:id",
         component: Profile,
+      },
+      {
+        path: "profile/:id/orders",
+        component: ProfileOrder,
       },
       {
         path: "/search",

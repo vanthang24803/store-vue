@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect , onMounted } from 'vue';
 import axios from 'axios';
 import * as z from 'zod'
 import { useHead } from '@unhead/vue'
@@ -9,7 +9,7 @@ import { useCartStore } from '@/store/cart';
 import { ChevronRight } from 'lucide-vue-next';
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
-import { useRouter } from 'vue-router'
+import { useRouter , useRoute } from 'vue-router'
 
 import { Button } from '@/components/ui/button'
 import { Check, MapPin, Package2 } from 'lucide-vue-next';
@@ -19,14 +19,15 @@ import {
     FormItem,
     FormMessage,
 } from '@/components/ui/form'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Input } from '@/components/ui/input'
 import Payment from '@/components/Payment.vue';
 import { info } from '@/constant';
 import OrderDetail from '@/components/OrderDetail.vue';
 import { useToast } from '@/components/ui/toast/use-toast'
+import { useAuthStore } from '@/store/auth';
 
 const { toast } = useToast();
-
 
 
 useHead({
@@ -34,6 +35,9 @@ useHead({
 });
 
 const router = useRouter();
+const auth = useAuthStore();
+const profile = ref();
+const loading = ref(false);
 
 const uuid = self.crypto.randomUUID();
 
@@ -47,6 +51,35 @@ const formSchema = toTypedSchema(z.object({
 const form = useForm({
     validationSchema: formSchema,
 })
+
+const fetchData = async () => {
+   try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${auth.user.id}`,
+         { headers: { Authorization: `Bearer ${auth.token}` } }
+      );
+      profile.value = response.data;
+
+
+   }
+   catch (error) {
+      console.error(error);
+   }
+}
+
+onMounted(fetchData);
+
+
+watchEffect(() => {
+   if (profile.value) {
+      form.setValues({
+         email: profile.value.email,
+         name: `${profile.value.firstName} ${profile.value.lastName}`,
+         numberPhone: "0",
+         address: profile.value.address,
+      });
+   }
+});
+
 
 const cart = useCartStore();
 
@@ -101,10 +134,11 @@ const onSubmit = form.handleSubmit(async (values) => {
         shipping: sendChecked.value,
         quantity: cart.totalItems,
         totalPrice: totalPrice,
-        userId: "",
+        userId: auth.user.id,
     }
 
     try {
+        loading.value = true;
         const response = await axios.post(
             `${import.meta.env.VITE_API_URL}/api/order/create`,
             dataSend,
@@ -128,6 +162,8 @@ const onSubmit = form.handleSubmit(async (values) => {
         }
     } catch (error) {
         console.log(error);
+    } finally {
+        loading.value = false;
     }
 
 });
@@ -149,6 +185,18 @@ const onSubmit = form.handleSubmit(async (values) => {
             </div>
 
             <span class="font-bold text-xl tracking-tight">Thông tin giao hàng</span>
+
+            <div class="flex items-center space-x-4" v-if="auth.isLogin">
+                <Avatar>
+                    <AvatarImage :src="auth.user.avatar" :alt="auth.user.name" />
+                    <AvatarFallback>A</AvatarFallback>
+                </Avatar>
+                <div class="flex flex-col">
+                    <p class="text-[14px] tracking-tight font-medium">
+                        {{ auth.user.name }} ({{ auth.user.email }})
+                    </p>
+                </div>
+            </div>
 
             <form @submit="onSubmit" class="w-full lg:w-[500px] flex flex-col space-y-3">
                 <FormField v-slot="{ componentField }" name="name">
@@ -228,7 +276,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 
                 <Payment :payment="payment" :handle-bank-change="handleBankChange" />
 
-                <Button type="submit">
+                <Button type="submit" :disabled="loading">
                     Hoàn tất đơn hàng
                 </Button>
             </form>
