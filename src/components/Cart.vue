@@ -6,6 +6,7 @@ import UpdateCart from './UpdateCart.vue';
 
 import {
     Sheet,
+    SheetClose,
     SheetContent,
     SheetDescription,
     SheetHeader,
@@ -19,6 +20,8 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { X } from 'lucide-vue-next';
 import { useRouter } from 'vue-router'
 import { ShoppingBasket } from 'lucide-vue-next';
+import CartSvg from "@/components/svg/CartSvg.vue"
+
 
 const router = useRouter();
 
@@ -31,7 +34,7 @@ const cart = useCartStore();
     <Sheet>
         <SheetTrigger>
             <div class="relative hover:cursor-pointer">
-                <ShoppingBag class="w-6 h-6" />
+                <CartSvg />
                 <div class="w-5 h-5 flex items-center justify-center rounded-full bg-red-500 absolute -top-2 -right-2">
                     <span class="text-white text-[12px]">
                         {{ cart.totalItems }}
@@ -41,7 +44,9 @@ const cart = useCartStore();
         </SheetTrigger>
         <SheetContent>
             <SheetHeader>
-                <SheetTitle>Giỏ Hàng</SheetTitle>
+                <SheetClose>
+                    <SheetTitle @click="router.push({ path: '/cart' })" class="hover:cursor-pointer text-left">Giỏ Hàng</SheetTitle>
+                </SheetClose>
                 <SheetDescription>
                     Số sản phẩm trong giỏ hàng: {{ cart.totalItems }}
                 </SheetDescription>

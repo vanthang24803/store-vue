@@ -21,6 +21,9 @@ import ProfileOrder from "@/views/ProfileOrder.vue";
 
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import ActionLayout from "@/layouts/ActionLayout.vue";
+import { useAuthStore } from "@/store/auth";
+
+const getAuth = () => useAuthStore();
 
 const routes = [
   {
@@ -40,10 +43,26 @@ const routes = [
       {
         path: "profile/:id",
         component: Profile,
+        beforeEnter: (to, from, next) => {
+          const auth = getAuth();
+          if (!auth.isLogin) {
+            next("/");
+          } else {
+            next();
+          }
+        },
       },
       {
         path: "profile/:id/orders",
         component: ProfileOrder,
+        beforeEnter: (to, from, next) => {
+          const auth = getAuth();
+          if (!auth.isLogin) {
+            next("/");
+          } else {
+            next();
+          }
+        },
       },
       {
         path: "/search",
@@ -110,6 +129,14 @@ const routes = [
       {
         path: "login",
         component: Login,
+        beforeEnter: (to, from, next) => {
+          const auth = getAuth();
+          if (!auth.isLogin) {
+            next();
+          } else {
+            next('/');
+          }
+        },
       },
     ],
   },

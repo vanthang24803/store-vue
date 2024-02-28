@@ -26,6 +26,7 @@ import { info } from '@/constant';
 import OrderDetail from '@/components/OrderDetail.vue';
 import { useToast } from '@/components/ui/toast/use-toast'
 import { useAuthStore } from '@/store/auth';
+import Separator from '@/components/ui/separator/Separator.vue';
 
 const { toast } = useToast();
 
@@ -54,20 +55,28 @@ const form = useForm({
 
 const fetchData = async () => {
    try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${auth.user.id}`,
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${auth.user?.id}`,
          { headers: { Authorization: `Bearer ${auth.token}` } }
       );
       profile.value = response.data;
-
-
    }
    catch (error) {
       console.error(error);
    }
 }
 
-onMounted(fetchData);
+onMounted(() => {
+    if(auth.user != null){
+        fetchData();
+    }
+});
 
+
+const cart = useCartStore();
+
+const payment = ref('cod');
+const sendChecked = ref(true);
+const storeChecked = ref(false);
 
 watchEffect(() => {
    if (profile.value) {
@@ -80,12 +89,6 @@ watchEffect(() => {
    }
 });
 
-
-const cart = useCartStore();
-
-const payment = ref('cod');
-const sendChecked = ref(true);
-const storeChecked = ref(false);
 
 const totalPrice = cart.items.reduce((total, item) => {
     return (
@@ -133,8 +136,8 @@ const onSubmit = form.handleSubmit(async (values) => {
         payment: payment.value.toUpperCase(),
         shipping: sendChecked.value,
         quantity: cart.totalItems,
-        totalPrice: totalPrice,
-        userId: auth.user.id,
+        totalPrice: priceCod,
+        userId: auth.user?.id || "",
     }
 
     try {

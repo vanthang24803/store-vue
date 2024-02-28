@@ -10,13 +10,13 @@ const auth = useAuthStore();
         <h2 class="uppercase font-semibold tracking-tight">
             TÀI KHOẢN
         </h2>
-        <RouterLink :to="`${auth.user.id}`" class="hover:text-[#417505] font-medium text-sm">Thông tin tài khoản
+        <RouterLink :to="`/profile/${auth.user.id}`" class="hover:text-[#417505] font-medium text-sm">Thông tin tài khoản
         </RouterLink>
 
-        <RouterLink :to="`${auth.user.id}/address`" class="hover:text-[#417505] font-medium text-sm">Địa chỉ
+        <RouterLink :to="`/profile/${auth.user.id}/address`" class="hover:text-[#417505] font-medium text-sm">Địa chỉ
         </RouterLink>
 
-        <RouterLink :to="`${auth.user.id}/orders`" class="hover:text-[#417505] font-medium text-sm">Đơn hàng
+        <RouterLink :to="`/profile/${auth.user.id}/orders`" class="hover:text-[#417505] font-medium text-sm">Đơn hàng
         </RouterLink>
 
         <span class="hover:text-[#417505] font-medium text-sm hover:cursor-pointer" @click="auth.logout">

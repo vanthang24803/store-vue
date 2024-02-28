@@ -37,9 +37,6 @@ useHead({
     title: `Đơn hàng - AMAK Store`
 })
 
-if (auth.isLogin == false) {
-    router.push({ path: '/' })
-}
 
 
 </script>

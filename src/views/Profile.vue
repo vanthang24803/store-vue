@@ -4,7 +4,7 @@ import { useHead } from '@unhead/vue'
 import { ref, watchEffect, onMounted } from 'vue';
 import { useForm } from 'vee-validate'
 import { useAuthStore } from '@/store/auth';
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import Container from '@/components/ui/Container.vue';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -41,13 +41,9 @@ const loading = ref(false);
 const update = ref(false);
 
 const auth = useAuthStore();
-const router = useRouter();
 const route = useRoute();
 const { toast } = useToast();
 
-if (auth.isLogin == false) {
-   router.push({ path: '/' })
-}
 
 const fetchData = async () => {
    try {
