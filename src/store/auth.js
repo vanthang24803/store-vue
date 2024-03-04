@@ -1,5 +1,6 @@
-import { defineStore } from "pinia";
 import axios from "axios";
+import { defineStore } from "pinia";
+import Cookies from "js-cookie";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -28,6 +29,9 @@ export const useAuthStore = defineStore("auth", {
           this.token = response.data.token;
           this.isLogin = true;
 
+          Cookies.set("token", response.data.token);
+          Cookies.set("roles", response.data.user.role);
+
           router.push({ path: "/" });
         }
       } catch (error) {
@@ -39,6 +43,9 @@ export const useAuthStore = defineStore("auth", {
       this.user = null;
       this.token = "";
       this.isLogin = false;
+
+      Cookies.remove("token");
+      Cookies.remove("roles");
 
       window.location.reload();
     },

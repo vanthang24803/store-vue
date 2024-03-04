@@ -27,6 +27,7 @@ import OrderDetail from '@/components/OrderDetail.vue';
 import { useToast } from '@/components/ui/toast/use-toast'
 import { useAuthStore } from '@/store/auth';
 import Separator from '@/components/ui/separator/Separator.vue';
+import SelectAddress from '@/components/SelectAddress.vue';
 
 const { toast } = useToast();
 
@@ -78,13 +79,15 @@ const payment = ref('cod');
 const sendChecked = ref(true);
 const storeChecked = ref(false);
 
+const exitAddress = ref('');
+
 watchEffect(() => {
    if (profile.value) {
       form.setValues({
          email: profile.value.email,
          name: `${profile.value.firstName} ${profile.value.lastName}`,
          numberPhone: "0",
-         address: profile.value.address,
+         address: profile.value.address || exitAddress,
       });
    }
 });
@@ -245,6 +248,7 @@ const onSubmit = form.handleSubmit(async (values) => {
                                     <FormMessage />
                                 </FormItem>
                             </FormField>
+                            <SelectAddress />
                         </div>
 
                         <Separator />
