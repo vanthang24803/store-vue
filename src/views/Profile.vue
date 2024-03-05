@@ -24,6 +24,7 @@ import {
    FormMessage
 } from '@/components/ui/form'
 import { useToast } from '@/components/ui/toast/use-toast'
+import UploadAvatar from '@/components/UploadAvatar.vue';
 
 const formSchema = toTypedSchema(z.object({
    email: z.string().min(1).max(255),
@@ -178,10 +179,7 @@ const onSubmit = form.handleSubmit(async (values) => {
                </form>
                <div class="flex flex-col space-y-2 pb-4" v-else>
                   <div class="flex items-center justify-center my-4">
-                     <Avatar class="w-24 h-24">
-                        <AvatarImage :src="auth.user.avatar" :alt="auth.user.name" />
-                        <AvatarFallback>A</AvatarFallback>
-                     </Avatar>
+                    <UploadAvatar :profile="profile" :id="auth.user.id" :fetch-data="fetchData" />
                   </div>
                   <p class="antialiased"> Tên: {{ profile?.firstName }} {{ profile?.lastName }}</p>
                   <p class="antialiased"> Email: {{ profile?.email }}</p>

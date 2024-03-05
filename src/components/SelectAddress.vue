@@ -45,15 +45,18 @@ watchEffect(async () => {
         }
     }
 });
+``
+
+const emit = defineEmits(['updateAddress']);
 
 watchEffect(() => {
     if (selectedProvince.value && selectedDistrict.value) {
         const provinceName = getProvinceName(selectedProvince.value);
         const districtName = getDistrictName(selectedDistrict.value);
         const wardName = getWardName(selectedWard.value);
-       let  address = `${provinceName || ''}, ${districtName || ''}, ${wardName || ''}`;
+        let  address = `${provinceName || ''}, ${districtName || ''}, ${wardName || ''}`;
 
-       console.log(address)
+        emit('updateAddress', address);
     }
 });
 

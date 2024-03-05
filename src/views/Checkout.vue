@@ -1,7 +1,8 @@
 <script setup>
-import { ref, watchEffect , onMounted } from 'vue';
+import { ref, watchEffect, onMounted } from 'vue';
 import axios from 'axios';
 import * as z from 'zod'
+import { Label } from '@/components/ui/label'
 import { useHead } from '@unhead/vue'
 import MobileCart from '@/components/MobileCart.vue';
 import { codPrice } from "@/constant"
@@ -9,7 +10,7 @@ import { useCartStore } from '@/store/cart';
 import { ChevronRight } from 'lucide-vue-next';
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
-import { useRouter , useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 import { Button } from '@/components/ui/button'
 import { Check, MapPin, Package2 } from 'lucide-vue-next';
@@ -29,6 +30,7 @@ import { useAuthStore } from '@/store/auth';
 import Separator from '@/components/ui/separator/Separator.vue';
 import SelectAddress from '@/components/SelectAddress.vue';
 
+
 const { toast } = useToast();
 
 
@@ -40,6 +42,7 @@ const router = useRouter();
 const auth = useAuthStore();
 const profile = ref();
 const loading = ref(false);
+
 
 const uuid = self.crypto.randomUUID();
 
@@ -55,19 +58,19 @@ const form = useForm({
 })
 
 const fetchData = async () => {
-   try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${auth.user?.id}`,
-         { headers: { Authorization: `Bearer ${auth.token}` } }
-      );
-      profile.value = response.data;
-   }
-   catch (error) {
-      console.error(error);
-   }
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${auth.user?.id}`,
+            { headers: { Authorization: `Bearer ${auth.token}` } }
+        );
+        profile.value = response.data;
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 
 onMounted(() => {
-    if(auth.user != null){
+    if (auth.user != null) {
         fetchData();
     }
 });
@@ -81,15 +84,24 @@ const storeChecked = ref(false);
 
 const exitAddress = ref('');
 
+
+const handleUpdateAddress = (newAddress) => {
+    exitAddress.value = newAddress;
+};
+
 watchEffect(() => {
-   if (profile.value) {
-      form.setValues({
-         email: profile.value.email,
-         name: `${profile.value.firstName} ${profile.value.lastName}`,
-         numberPhone: "0",
-         address: profile.value.address || exitAddress,
-      });
-   }
+    if (profile.value) {
+        form.setValues({
+            email: profile.value.email,
+            name: `${profile.value.firstName} ${profile.value.lastName}`,
+            numberPhone: "0",
+            address: profile.value.address,
+        });
+    }
+    form.setValues({
+        address: exitAddress
+    });
+
 });
 
 
@@ -193,7 +205,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             <span class="font-bold text-xl tracking-tight">Thông tin giao hàng</span>
 
             <div class="flex items-center space-x-4" v-if="auth.isLogin">
-                <Avatar>
+                <Avatar @click="router.push({path: `/profile/${profile.id}`})">
                     <AvatarImage :src="auth.user.avatar" :alt="auth.user.name" />
                     <AvatarFallback>A</AvatarFallback>
                 </Avatar>
@@ -248,7 +260,7 @@ const onSubmit = form.handleSubmit(async (values) => {
                                     <FormMessage />
                                 </FormItem>
                             </FormField>
-                            <SelectAddress />
+                            <SelectAddress @updateAddress="handleUpdateAddress" v-if="!profile" />
                         </div>
 
                         <Separator />
