@@ -1,31 +1,50 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed, watchEffect } from 'vue';
 import axios from 'axios';
 import Card from '@/components/Card.vue';
 import Spinner from "@/components/Spinner.vue";
 import Billboard from '@/components/Billboard.vue';
-import Button from '@/components/ui/button/Button.vue';
 import Container from '@/components/ui/Container.vue';
 import Categories from '@/components/Categories.vue';
 import { useHead } from '@unhead/vue'
+import BottomPagination from '@/components/BottomPagination.vue';
+import { subBillboard } from "@/constant"
 
 let products = ref([]);
 let isProductLoading = ref(false);
 let isBillboardLoading = ref(false);
 let billboards = ref([]);
+let currentPage = ref(1);
+let totalProducts = ref(0);
 
-onMounted(async () => {
+
+
+const fetchProducts = async () => {
   try {
     isProductLoading.value = true;
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product`);
-    products.value = response.data;
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product?Page=${currentPage.value} `);
+
+
+    totalProducts = response.data.length;
+    products.value = response.data.slice((currentPage.value - 1) * 10, currentPage.value * 10)
+
   }
   catch (error) {
     console.error(error);
   } finally {
     isProductLoading.value = false;
   }
+}
+
+
+watchEffect(async () => {
+  fetchProducts();
 });
+
+const changePage = (number) => {
+  currentPage.value = number;
+  fetchProducts();
+}
 
 onMounted(async () => {
   try {
@@ -50,8 +69,15 @@ useHead({
 <template>
   <Container>
     <div class="w-full rounded-md flex items-center justify-center border-neutral-400 min-h-[20vh]">
-      <Spinner v-if="isBillboardLoading" />
-      <Billboard :billboards="billboards" v-else />
+      <div class="flex items-center justify-between space-x-2">
+        <Spinner v-if="isBillboardLoading" />
+        <Billboard :billboards="billboards" v-else />
+        <div class="hidden lg:flex flex-col space-y-4">
+          <div v-for="(item, index) in subBillboard" :key="index" class="hover:cursor-pointer rounded-md">
+            <img :src="item.thumbnail" :alt="item.name" class="rounded-md" />
+          </div>
+        </div>
+      </div>
     </div>
     <Categories />
     <div class="flex flex-col space-y-4">
@@ -59,15 +85,13 @@ useHead({
       <div>
         <Spinner v-if="isProductLoading" />
         <div class="flex items-center justify-center flex-col space-y-8" v-else>
-          <div class="grid lg:grid-cols-6 grid-cols-2 gap-4">
+          <div class="grid lg:grid-cols-5 grid-cols-2 gap-4 lg:gap-6">
             <Card v-for="product in products" :key="product.id" :product="product" />
           </div>
 
-          <Button size="lg">Xem Thêm</Button>
+          <BottomPagination :currentPage="currentPage" :total="totalProducts" :changePage="changePage" />
         </div>
       </div>
     </div>
   </Container>
 </template>
-
-

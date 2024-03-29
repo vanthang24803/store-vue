@@ -13,24 +13,16 @@ import Autoplay from 'embla-carousel-autoplay'
     <Carousel class="relative w-full" :opts="{
         align: 'start',
         loop: true,
-    }" 
-    :plugins="[Autoplay({
-    delay: 2000,
-    })]"
-    >
+    }" :plugins="[Autoplay({
+        delay: 2000,
+    })]">
         <CarouselContent>
-            <CarouselItem v-for="(item, index) in billboards" :key="index" class="w-full rounded-md">
-                <AspectRatio :ratio="16 / 9" class="bg-muted">
-                    <RouterLink :to="item.url" class="flex items-center justify-center">
-                        <img :src="item.thumbnail" :alt="item.name"
-                            class="rounded-xl lg:w-[80%] w-full object-cover hover:scale-105 transform transition-transform duration-500" />
-                    </RouterLink>
-                </AspectRatio>
+            <CarouselItem v-for="(item, index) in billboards" :key="index" class="rounded-md flex items-center justify-normal">
+                <RouterLink :to="item.url" class="flex items-center justify-center">
+                    <img :src="item.thumbnail" :alt="item.name"
+                        class="rounded-md lg:h-[60vh] object-cover hover:scale-105 transform transition-transform duration-500" />
+                </RouterLink>
             </CarouselItem>
         </CarouselContent>
-        <CarouselPrevious class="hidden lg:flex " />
-        <CarouselNext class="hidden lg:flex" />
     </Carousel>
 </template>
-
-

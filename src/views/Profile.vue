@@ -122,7 +122,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 <template>
    <Container>
       <div class="flex flex-col space-y-8">
-         <div class="flex items-center justify-center flex-col  space-y-4 ">
+         <div class="flex items-center justify-center flex-col  space-y-4">
             <h1 class="text-2xl md:text-3xl font-bold tracking-tighter">Tài khoản của bạn</h1>
             <Separator class="h-1 bg-black rounded w-[100px]" />
          </div>
@@ -179,7 +179,7 @@ const onSubmit = form.handleSubmit(async (values) => {
                </form>
                <div class="flex flex-col space-y-2 pb-4" v-else>
                   <div class="flex items-center justify-center my-4">
-                    <UploadAvatar :profile="profile" :id="auth.user.id" :fetch-data="fetchData" />
+                     <UploadAvatar :profile="profile" :id="auth.user.id" :fetch-data="fetchData" />
                   </div>
                   <p class="antialiased"> Tên: {{ profile?.firstName }} {{ profile?.lastName }}</p>
                   <p class="antialiased"> Email: {{ profile?.email }}</p>

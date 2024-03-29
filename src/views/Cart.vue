@@ -56,9 +56,9 @@ useHead({
                                                     <span> {{ item.product.name }}</span>
                                                 </RouterLink>
                                                 <X class="md:mx-4 w-4 h-4" @click="cart.removeItem(
-                                                    item.product.id,
-                                                    item.product.options[0].id
-                                                )" />
+                    item.product.id,
+                    item.product.options[0].id
+                )" />
                                             </div>
 
                                             <span class="text-neutral-500 text-[12px]">
@@ -71,14 +71,14 @@ useHead({
                                                 <div class="flex items-center space-x-2 md:mx-4">
                                                     <span class="font-bold text-rose-500">
                                                         {{ formatPrice(
-                                                            item.product.options[0].price,
-                                                            item.product.options[0].sale
-                                                        ) }} ₫
+                    item.product.options[0].price,
+                    item.product.options[0].sale
+                ) }} ₫
                                                     </span>
 
                                                     <span v-show="item.product.options[0].sale > 0"
                                                         class="text-[12px] line-through hidden md:block">{{
-                                                            price(item.product.options[0].price) }} ₫</span>
+                    price(item.product.options[0].price) }} ₫</span>
                                                 </div>
                                             </div>
                                         </div>

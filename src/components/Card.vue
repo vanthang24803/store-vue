@@ -23,7 +23,7 @@ const cart = useCartStore();
             <img :src="product.thumbnail" :alt="product.name"
                 class="object-cover rounded-md hover:scale-105 lg:h-[40vh] transform transition-transform duration-500 p-2 ">
 
-            <div class="flex flex-col space-y-2 p-2">
+            <div class="flex flex-col space-y-2 p-2 lg:p-4">
                 <span class="text-neutral-500 font-medium text-sm">
                     {{ product.brand }}
                 </span>

@@ -28,8 +28,7 @@ export const useAuthStore = defineStore("auth", {
           this.token = response.data.token;
           this.isLogin = true;
 
-          
-
+        
           router.push({ path: "/" });
         }
       } catch (error) {
@@ -42,7 +41,6 @@ export const useAuthStore = defineStore("auth", {
       this.token = "";
       this.isLogin = false;
 
-     
       window.location.reload();
     },
   },

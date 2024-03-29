@@ -65,7 +65,7 @@ const cart = useCartStore();
                                 <div class="flex flex-col">
                                     <div class="relative w-[220px]">
                                         <span
-                                            class="text-xs text-muted-foreground line-clamp-2 flex-grow min-w-0 overflow-hidden text-overflow-ellipsis">
+                                            class="text-xs   line-clamp-2 flex-grow min-w-0 overflow-hidden text-overflow-ellipsis">
                                             {{ item.product.name }}
                                         </span>
                                         <X class="w-4 h-4 absolute top-0 -right-4" @click="cart.removeItem(
