@@ -1,5 +1,4 @@
 <script setup>
-import { ShoppingBag } from 'lucide-vue-next';
 import { useCartStore } from '@/store/cart';
 import { price, formatPrice } from "@/lib/format"
 import UpdateCart from './UpdateCart.vue';
@@ -104,7 +103,7 @@ const cart = useCartStore();
                         {{ cart.totalPrice }}
                     </span>
                 </div>
-                <Button class="bg-black" @click="router.push({ path: '/check-out' })">
+                <Button variant="primary"  @click="router.push({ path: '/check-out' })">
                     Thanh toán
                 </Button>
             </div>

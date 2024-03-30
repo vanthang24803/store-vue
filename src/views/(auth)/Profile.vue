@@ -1,13 +1,11 @@
 <script setup>
 import axios from 'axios';
-import { useHead } from '@unhead/vue'
 import { ref, watchEffect, onMounted } from 'vue';
 import { useForm } from 'vee-validate'
 import { useAuthStore } from '@/store/auth';
 import { useRoute } from 'vue-router';
 import Container from '@/components/ui/Container.vue';
 import { Separator } from '@/components/ui/separator';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import ProfileBar from '@/components/ProfileBar.vue';
 
 import { Button } from '@/components/ui/button'
@@ -25,12 +23,16 @@ import {
 } from '@/components/ui/form'
 import { useToast } from '@/components/ui/toast/use-toast'
 import UploadAvatar from '@/components/UploadAvatar.vue';
+import { useTitle } from '@vueuse/core';
+import { statusRanking, statusRankingIcon } from '@/constant';
+import { price } from '@/lib/format';
+import Spinner from '@/components/Spinner.vue';
+
 
 const formSchema = toTypedSchema(z.object({
    email: z.string().min(1).max(255),
    firstName: z.string().min(1).max(50),
    lastName: z.string().min(1).max(50),
-   address: z.string().min(1).max(255),
 }))
 
 const form = useForm({
@@ -51,14 +53,16 @@ const fetchData = async () => {
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${route.params.id}`,
          { headers: { Authorization: `Bearer ${auth.token}` } }
       );
-      profile.value = response.data;
 
-
+      if (response.status === 200) {
+         profile.value = response.data.profile
+      }
    }
    catch (error) {
       console.error(error);
    }
 }
+
 
 onMounted(fetchData);
 
@@ -68,15 +72,12 @@ watchEffect(() => {
          email: profile.value.email,
          firstName: profile.value.firstName,
          lastName: profile.value.lastName,
-         address: profile.value.address,
       });
 
-      useHead({
-         title: `Trang cá nhân -  ${profile.value.firstName} ${profile.value.lastName}`
-      })
+
+      useTitle(`Trang cá nhân -  ${profile.value.firstName} ${profile.value.lastName}`)
    }
 });
-
 
 
 const handleUpdate = () => {
@@ -130,7 +131,9 @@ const onSubmit = form.handleSubmit(async (values) => {
          <div class="flex flex-col lg:flex-row  md:px-12 px-4 space-y-4 lg:space-y-0">
             <ProfileBar />
 
-            <div class="flex flex-col space-y-4 w-full bg-white p-4 rounded-md">
+            <Spinner v-show="loading" />
+
+            <div v-show="profile" class="flex flex-col space-y-4 w-full bg-white p-4 rounded-md">
                <h2 class="uppercase font-semibold tracking-tight">
                   THÔNG TIN TÀI KHOẢN
                </h2>
@@ -164,15 +167,6 @@ const onSubmit = form.handleSubmit(async (values) => {
                         <FormMessage />
                      </FormItem>
                   </FormField>
-                  <FormField v-slot="{ componentField }" name="address">
-                     <FormItem>
-                        <FormLabel>Address</FormLabel>
-                        <FormControl>
-                           <Input type="text" placeholder="Address..." v-bind="componentField" />
-                        </FormControl>
-                        <FormMessage />
-                     </FormItem>
-                  </FormField>
                   <Button type="submit" :disabled="loading" class="lg:w-1/3">
                      Xác nhận
                   </Button>
@@ -181,16 +175,18 @@ const onSubmit = form.handleSubmit(async (values) => {
                   <div class="flex items-center justify-center my-4">
                      <UploadAvatar :profile="profile" :id="auth.user.id" :fetch-data="fetchData" />
                   </div>
-                  <p class="antialiased"> Tên: {{ profile?.firstName }} {{ profile?.lastName }}</p>
-                  <p class="antialiased"> Email: {{ profile?.email }}</p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 py-4 text-sm">
+                     <p class="antialiased"> Tên: {{ profile?.firstName }} {{ profile?.lastName }}</p>
+                     <p class="antialiased"> Email: {{ profile?.email }}</p>
 
-                  <div class="pb-2">
-                     <p v-if="profile?.address != ''">
-                        Địa chỉ: {{ profile?.address }}
-                     </p>
-                     <p v-else>Địa chỉ: Đang cập nhật</p>
+                     <div class="flex items-start space-x-2">
+                        <span> Thành viên: {{ statusRanking[profile?.rank] }}</span>
+                        <img :src="statusRankingIcon[profile?.rank]" :alt="statusRanking[profile?.rank]"
+                           class="w-5 h-5 object-cover">
+                     </div>
+                     <span>Tổng đơn hàng đã mua: {{ profile?.totalOrder }}</span>
+                     <span>Tổng chi tiêu: {{ price(profile?.totalPrice) }}₫</span>
                   </div>
-
                   <Button class="lg:w-[160px] w-full" @click="handleUpdate">
                      Cập nhật thông tin
                   </Button>

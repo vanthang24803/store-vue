@@ -96,7 +96,7 @@ useHead({
                                                         {{ item.sale }}%
                                                     </Button>
                                                 </div>
-                                                <span class="text-lg font-semibold text-[#ef4444]">
+                                                <span class="text-lg text-neutral-800">
                                                     {{ price(item.price) }}₫
                                                 </span>
                                             </div>

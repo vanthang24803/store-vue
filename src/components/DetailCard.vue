@@ -111,7 +111,7 @@ const copy = async (id) => {
                         <div class="flex items-center space-x-2 text-sm py-4">
                             <span class="font-semibold">Số lượng:</span>
                             <div className="flex items-center space-x-2">
-                                <Button size="icon" :disabled="total <= 0" :variant="total > 0 && outline"
+                                <Button size="icon" :disabled="total <= 1" :variant="total > 0 && outline"
                                     class="font-medium" @click="total > 0 ? total-- : null">
                                     <Minus />
                                 </Button>
@@ -123,7 +123,7 @@ const copy = async (id) => {
                                 </Button>
                             </div>
                         </div>
-                        <Button @click="cart.addItem(product, option.id, total)">
+                        <Button variant="primary" @click="cart.addItem(product, option.id, total)">
                             Thêm vào giỏ hàng
                         </Button>
 

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { ShoppingCart } from 'lucide-vue-next';
 import { useCartStore } from '@/store/cart';
 
-const props = defineProps({
+defineProps({
     product: Object,
 });
 

@@ -39,7 +39,6 @@ watch(() => route.params.id, fetchProduct);
 
 </script>
 
-
 <template>
     <div class="my-12 py-6 px-4 bg-neutral-100/90 min-h-screen">
         <div class="md:max-w-screen-xl mx-auto flex flex-col space-y-6">
@@ -55,7 +54,7 @@ watch(() => route.params.id, fetchProduct);
                     </div>
 
                     <DetailCard :product="product" />
-                    <Introduce v-if="product.information" :data="product.information" />
+                    <Introduce v-if="product" :data="product" />
 
                     <Suggest :category="product.categories[0].name" />
 

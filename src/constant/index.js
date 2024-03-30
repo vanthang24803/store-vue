@@ -223,3 +223,19 @@ export const subBillboard = [
     url: "/",
   },
 ];
+
+export const statusRanking = {
+  Bronze: "Đồng",
+  Silver: "Bạc",
+  Gold: "Vàng",
+  Platinum: "Bạch kim",
+  Diamond: "Kim cương",
+};
+
+export const statusRankingIcon = {
+  Bronze: "/3.png",
+  Silver: "/2.png",
+  Gold: "/1.png",
+  Platinum: "/4.png",
+  Diamond: "/5.png",
+};

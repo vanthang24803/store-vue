@@ -1,26 +1,23 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Home from "@/views/Home.vue";
-import NotFound from "@/views/NotFound.vue";
-import Manga from "@/views/Manga.vue";
-import Detail from "@/views/Detail.vue";
-import Products from "@/views/Products.vue";
-import SachMoi from "@/views/SachMoi.vue";
-import LightNovel from "@/views/LightNovel.vue";
-import TieuThuyet from "@/views/TieuThuyet.vue";
-import KyNang from "@/views/KyNang.vue";
-import PhuKien from "@/views/PhuKien.vue";
-import Order from "@/views/Order.vue";
-import TraCuu from "@/views/TraCuu.vue";
-import Cart from "@/views/Cart.vue";
-import Checkout from "@/views/Checkout.vue";
-import SearchPage from "@/views/SearchPage.vue";
-import Login from "@/views/Login.vue";
-import Profile from "@/views/Profile.vue";
-import ProfileOrder from "@/views/ProfileOrder.vue";
+import { Home, NotFound, Detail } from "@/views/(main)";
 
-import DefaultLayout from "@/layouts/DefaultLayout.vue";
-import ActionLayout from "@/layouts/ActionLayout.vue";
+import {
+  KyNang,
+  LightNovel,
+  Manga,
+  PhuKien,
+  SachMoi,
+  TieuThuyet,
+  Products,
+} from "@/views/(collections)";
+
+import { Cart, Checkout, Order, SearchPage, TraCuu } from "@/views/(actions)";
+
+import { Login, Profile, ProfileOrder } from "@/views/(auth)";
+
+import { DefaultLayout, ActionLayout } from "@/layouts";
+
 import { useAuthStore } from "@/store/auth";
 
 const getAuth = () => useAuthStore();
@@ -134,7 +131,7 @@ const routes = [
           if (!auth.isLogin) {
             next();
           } else {
-            next('/');
+            next("/");
           }
         },
       },

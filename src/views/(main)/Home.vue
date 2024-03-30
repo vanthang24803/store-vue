@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watchEffect } from 'vue';
+import { ref, onMounted, watchEffect } from 'vue';
 import axios from 'axios';
 import Card from '@/components/Card.vue';
 import Spinner from "@/components/Spinner.vue";
@@ -24,8 +24,7 @@ const fetchProducts = async () => {
     isProductLoading.value = true;
     const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product?Page=${currentPage.value} `);
 
-
-    totalProducts = response.data.length;
+    totalProducts.value = response.data.length;
     products.value = response.data.slice((currentPage.value - 1) * 10, currentPage.value * 10)
 
   }
