@@ -17,8 +17,6 @@ let billboards = ref([]);
 let currentPage = ref(1);
 let totalProducts = ref(0);
 
-
-
 const fetchProducts = async () => {
   try {
     isProductLoading.value = true;
@@ -70,10 +68,12 @@ useHead({
     <div class="w-full rounded-md flex items-center justify-center border-neutral-400 min-h-[20vh]">
       <div class="flex items-center justify-between space-x-2">
         <Spinner v-if="isBillboardLoading" />
-        <Billboard :billboards="billboards" v-else />
-        <div class="hidden lg:flex flex-col space-y-4">
-          <div v-for="(item, index) in subBillboard" :key="index" class="hover:cursor-pointer rounded-md">
-            <img :src="item.thumbnail" :alt="item.name" class="rounded-md" />
+        <div class="flex" v-else>
+          <Billboard :billboards="billboards" />
+          <div class="hidden lg:flex flex-col space-y-4">
+            <div v-for="(item, index) in subBillboard" :key="index" class="hover:cursor-pointer rounded-md">
+              <img :src="item.thumbnail" :alt="item.name" class="rounded-md" />
+            </div>
           </div>
         </div>
       </div>

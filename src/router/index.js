@@ -14,7 +14,7 @@ import {
 
 import { Cart, Checkout, Order, SearchPage, TraCuu } from "@/views/(actions)";
 
-import { Login, Profile, ProfileOrder } from "@/views/(auth)";
+import { Login, Profile, ProfileOrder, Address } from "@/views/(auth)";
 
 import { DefaultLayout, ActionLayout } from "@/layouts";
 
@@ -52,6 +52,18 @@ const routes = [
       {
         path: "profile/:id/orders",
         component: ProfileOrder,
+        beforeEnter: (to, from, next) => {
+          const auth = getAuth();
+          if (!auth.isLogin) {
+            next("/");
+          } else {
+            next();
+          }
+        },
+      },
+      {
+        path: "profile/:id/address",
+        component: Address,
         beforeEnter: (to, from, next) => {
           const auth = getAuth();
           if (!auth.isLogin) {

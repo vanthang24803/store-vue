@@ -10,7 +10,7 @@ import { useCartStore } from '@/store/cart';
 import { ChevronRight } from 'lucide-vue-next';
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 import { Button } from '@/components/ui/button'
 import { Check, MapPin, Package2 } from 'lucide-vue-next';
@@ -62,7 +62,7 @@ const fetchData = async () => {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${auth.user?.id}`,
             { headers: { Authorization: `Bearer ${auth.token}` } }
         );
-        profile.value = response.data;
+        profile.value = response.data.profile;
     }
     catch (error) {
         console.error(error);
@@ -94,7 +94,7 @@ watchEffect(() => {
         form.setValues({
             email: profile.value.email,
             name: `${profile.value.firstName} ${profile.value.lastName}`,
-            numberPhone: "0",
+            numberPhone: "",
             address: profile.value.address,
         });
     }

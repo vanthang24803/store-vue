@@ -137,7 +137,7 @@ onMounted(fetchProfile);
                         </DropdownMenuGroup>
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <UserSvg v-else @click="router.push({ path: 'login' })" />
+                <UserSvg v-else @click="router.push({ path: '/login' })" />
                 <Cart />
                 <Menu />
             </div>
