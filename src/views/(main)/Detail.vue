@@ -1,7 +1,6 @@
 <script setup>
-import { ref, onMounted , watch } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import axios from 'axios';
 import Spinner from "@/components/Spinner.vue"
 import { RouterLink } from 'vue-router';
 import { ChevronRight } from 'lucide-vue-next';
@@ -9,7 +8,9 @@ import DetailCard from '@/components/DetailCard.vue';
 import Introduce from '@/components/Introduce.vue';
 import Suggest from "@/components/Suggest.vue"
 import { useHead } from '@unhead/vue'
+import { get } from '@/lib/api';
 
+import { Reviews } from "@/components/reviews"
 
 const product = ref(null);
 const isLoading = ref(false);
@@ -18,9 +19,9 @@ const route = useRoute();
 const fetchProduct = async () => {
     try {
         isLoading.value = true;
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product/${route.params.id}`);
+        const response = await get(`/api/product/${route.params.id}`);
         product.value = response.data;
-        
+
         useHead({
             title: `${product.value.name} | AMAK Store`
         });
@@ -55,7 +56,7 @@ watch(() => route.params.id, fetchProduct);
 
                     <DetailCard :product="product" />
                     <Introduce v-if="product" :data="product" />
-
+                    <Reviews :productId="route.params.id" />
                     <Suggest :category="product.categories[0].name" />
 
                 </div>
