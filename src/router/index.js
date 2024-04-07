@@ -14,7 +14,13 @@ import {
 
 import { Cart, Checkout, Order, SearchPage, TraCuu } from "@/views/(actions)";
 
-import { Login, Profile, ProfileOrder, Address } from "@/views/(auth)";
+import {
+  Login,
+  Profile,
+  ProfileOrder,
+  Address,
+  Register,
+} from "@/views/(auth)";
 
 import { DefaultLayout, ActionLayout } from "@/layouts";
 
@@ -139,6 +145,18 @@ const routes = [
         path: "login",
         component: Login,
         beforeEnter: (to, from, next) => {
+          const auth = getAuth();
+          if (!auth.isLogin) {
+            next();
+          } else {
+            next("/");
+          }
+        },
+      },
+      {
+        path: "register",
+        component: Register,
+        beforeEnter: (_, __, next) => {
           const auth = getAuth();
           if (!auth.isLogin) {
             next();

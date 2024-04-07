@@ -19,10 +19,10 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/store/auth'; 
+import { useAuthStore } from '@/store/auth';
 
 const router = useRouter();
-const auth = useAuthStore(); 
+const auth = useAuthStore();
 
 useHead({
     title: 'Đăng Nhập - AMAK Store'
@@ -61,7 +61,7 @@ const onSubmit = handleSubmit(async (values) => {
             <h2 class="text-xl font-semibold subpixel-antialiased">
                 Login
             </h2>
-            <span class="font-medium text-sm text-muted-foreground">
+            <span class="font-medium text-sm">
                 to continue to AMAK Store
             </span>
         </div>
@@ -71,7 +71,7 @@ const onSubmit = handleSubmit(async (values) => {
                 <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                        <Input type="email" placeholder="Email..." v-bind="componentField" autocomplete="off" />
+                        <Input type="email" placeholder="Email..." v-bind="componentField" autocomplete="off" :disabled="loading" />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -80,7 +80,7 @@ const onSubmit = handleSubmit(async (values) => {
                 <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                        <Input type="password" placeholder="Password..." v-bind="componentField" autocomplete="off" />
+                        <Input type="password" placeholder="Password..." v-bind="componentField" autocomplete="off" :disabled="loading" />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -93,5 +93,11 @@ const onSubmit = handleSubmit(async (values) => {
             </Button>
         </form>
 
+        <div class="flex items-center space-x-1 text-sm">
+            <p> No account? </p>
+            <RouterLink to="/register" class="text-sm text-sky-500">
+                Create now
+            </RouterLink>
+        </div>
     </Modal>
 </template>
