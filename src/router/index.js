@@ -10,6 +10,7 @@ import {
   SachMoi,
   TieuThuyet,
   Products,
+  BanChay
 } from "@/views/(collections)";
 
 import { Cart, Checkout, Order, SearchPage, TraCuu } from "@/views/(actions)";
@@ -97,6 +98,11 @@ const routes = [
         path: "/collections/light-novel",
         name: "light-novel",
         component: LightNovel,
+      },
+      {
+        path: "/collections/sach-ban-chay",
+        name: "sach-ban-chay",
+        component: BanChay,
       },
       {
         path: "/collections/tieu-thuyet",

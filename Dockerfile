@@ -1,17 +1,17 @@
 FROM node:lts-alpine
 
-RUN npm install -g http-server
+RUN npm install -g http-server pnpm
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN pnpm install
 
 
 COPY . .
 
-RUN npm run build
+RUN pnpm run build
 
 EXPOSE 3000
 CMD [ "http-server", "dist" ]
