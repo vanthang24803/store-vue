@@ -1,12 +1,11 @@
 <script setup>
-import axios from 'axios';
 import { ref, watchEffect, onMounted } from 'vue';
 import { useForm } from 'vee-validate'
 import { useAuthStore } from '@/store/auth';
 import { useRoute } from 'vue-router';
 import Container from '@/components/ui/Container.vue';
 import { Separator } from '@/components/ui/separator';
-import ProfileBar from '@/components/ProfileBar.vue';
+import ProfileBar from '@/components/profile/ProfileBar.vue';
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -22,11 +21,12 @@ import {
    FormMessage
 } from '@/components/ui/form'
 import { useToast } from '@/components/ui/toast/use-toast'
-import UploadAvatar from '@/components/UploadAvatar.vue';
+import UploadAvatar from '@/components/profile/UploadAvatar.vue';
 import { useTitle } from '@vueuse/core';
 import { statusRanking, statusRankingIcon } from '@/constant';
 import { price } from '@/lib/format';
-import Spinner from '@/components/Spinner.vue';
+import Spinner from '@/components/main/Spinner.vue';
+import { get, put } from '@/lib/api';
 
 
 const formSchema = toTypedSchema(z.object({
@@ -50,7 +50,7 @@ const { toast } = useToast();
 
 const fetchData = async () => {
    try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${route.params.id}`,
+      const response = await get(`/api/auth/profile/${route.params.id}`,
          { headers: { Authorization: `Bearer ${auth.token}` } }
       );
 
@@ -87,8 +87,7 @@ const handleUpdate = () => {
 const onSubmit = form.handleSubmit(async (values) => {
    try {
       loading.value = true;
-      const response = await axios.put(
-         `${import.meta.env.VITE_API_URL}/api/auth/profile/${route.params.id}`,
+      const response = await put(`/api/auth/profile/${route.params.id}`,
          values,
          {
             headers: {

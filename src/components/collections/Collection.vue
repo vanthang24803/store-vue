@@ -13,11 +13,11 @@ import { Label } from '@/components/ui/label'
 import { price, selects } from "@/constant/index"
 import Container from "@/components/ui/Container.vue";
 import { ChevronRight, Check, Feather } from 'lucide-vue-next';
-import Card from "@/components/Card.vue";
+import Card from "@/components/card/Card.vue";
 
 import { RouterLink } from "vue-router";
 
-const props = defineProps({
+defineProps({
     category: String,
     selectedPrice: String,
     selectedFilter: String,

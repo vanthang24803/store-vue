@@ -5,12 +5,12 @@ import { useRouter, useRoute } from 'vue-router';
 import Container from '@/components/ui/Container.vue';
 import { useHead } from '@unhead/vue';
 import { useAuthStore } from '@/store/auth';
-import axios from 'axios';
-import ProfileBar from '@/components/ProfileBar.vue';
+import ProfileBar from '@/components/profile/ProfileBar.vue';
 import { ShoppingBasket } from 'lucide-vue-next';
 import { statusList } from '@/constant'
 import { price } from '@/lib/format';
 import { Button } from '@/components/ui/button'
+import { get } from '@/lib/api';
 
 const orders = ref([]);
 
@@ -20,7 +20,7 @@ const auth = useAuthStore();
 
 const fetchData = async () => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/order/${route.params.id}/user`,
+        const response = await get(`/api/order/${route.params.id}/user`,
             { headers: { Authorization: `Bearer ${auth.token}` } }
         );
         orders.value = response.data;

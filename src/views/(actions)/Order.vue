@@ -1,6 +1,5 @@
 <script setup>
-import axios from 'axios';
-import Modal from '@/components/Modal.vue';
+import Modal from '@/components/ui/Modal.vue';
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue'
@@ -8,9 +7,10 @@ import { price } from '@/lib/format';
 import { format } from "date-fns";
 import { statusList } from '@/constant';
 import { Button } from '@/components/ui/button'
-import Spinner from '@/components/Spinner.vue';
+import Spinner from '@/components/main/Spinner.vue';
 import { useToast } from '@/components/ui/toast/use-toast'
 import confetti from 'canvas-confetti';
+import { get } from '@/lib/api';
 
 
 const { toast } = useToast();
@@ -24,7 +24,7 @@ const router = useRouter();
 onMounted(async () => {
     try {
         isLoading.value = true;
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/order/${route.params.id}`);
+        const response = await get(`/api/order/${route.params.id}`);
         order.value = response.data;
         confetti();
     }

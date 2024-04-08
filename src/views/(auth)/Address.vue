@@ -1,9 +1,8 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
-import ProfileBar from '@/components/ProfileBar.vue';
-import Spinner from '@/components/Spinner.vue';
+import ProfileBar from '@/components/profile/ProfileBar.vue';
+import Spinner from '@/components/main/Spinner.vue';
 import Container from '@/components/ui/Container.vue';
-import axios from 'axios';
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
 import { useTitle } from '@vueuse/core';
@@ -23,6 +22,7 @@ import {
 import { useForm } from 'vee-validate';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/toast';
+import { get, post, put } from '@/lib/api';
 
 const formSchema = toTypedSchema(z.object({
   name: z.string().min(1).max(255),
@@ -48,7 +48,7 @@ const toggleCreate = () => {
 
 const fetchData = async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${route.params.id}/address`,
+    const response = await get(`/api/auth/profile/${route.params.id}/address`,
       { headers: { Authorization: `Bearer ${auth.token}` } }
     );
 
@@ -65,7 +65,7 @@ watchEffect(fetchData)
 
 const onSubmit = form.handleSubmit(async (values) => {
   try {
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/profile/${route.params.id}/address`, values, {
+    const response = await post(`/api/auth/profile/${route.params.id}/address`, values, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth.token}`,
@@ -74,7 +74,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 
     if (response.data === 200) {
       toast({
-         description: 'Success'
+        description: 'Success'
       })
       fetchData();
     }
@@ -86,8 +86,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 
 const activeAddress = async (addressId) => {
   try {
-    const response = await axios.put(
-      `${import.meta.env.VITE_API_URL}/api/auth/profile/${route.params.id}/address/${addressId}/active`,
+    const response = await put(`/api/auth/profile/${route.params.id}/address/${addressId}/active`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +97,7 @@ const activeAddress = async (addressId) => {
 
     if (response.status == 200) {
       toast({
-         description: 'Success'
+        description: 'Success'
       })
       fetchData()
     }
@@ -150,10 +149,10 @@ useTitle(`Danh sách địa chỉ -  ${auth.user.name}`)
 
           <div v-else>
             <div class="flex flex-col space-y-3 pt-2" v-for="(item, index) in address" :key="index">
-              <div class="flex items-center justify-between"
-              >
+              <div class="flex items-center justify-between">
                 <div
-                  class="p-3 border rounded-md flex items-center justify-between hover:cursor-pointer hover:bg-neutral-100/80 w-full" @click="activeAddress(item.id)">
+                  class="p-3 border rounded-md flex items-center justify-between hover:cursor-pointer hover:bg-neutral-100/80 w-full"
+                  @click="activeAddress(item.id)">
                   <p class="text-sm mx-2">
                     {{ item.name }}
                   </p>

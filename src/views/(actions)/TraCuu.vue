@@ -1,6 +1,6 @@
 <script setup>
-import Logo from '@/components/Logo.vue';
-import Modal from '@/components/Modal.vue';
+import Logo from '@/components/main/Logo.vue';
+import Modal from '@/components/ui/Modal.vue';
 import { ref } from 'vue';
 import { statusList } from '@/constant';
 import { price } from '@/lib/format';
@@ -9,7 +9,6 @@ import { format } from "date-fns";
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
-import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue'
 
@@ -22,7 +21,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import Spinner from '@/components/Spinner.vue';
+import Spinner from '@/components/main/Spinner.vue';
+import { get } from '@/lib/api';
 
 let error = ref("");
 let order = ref();
@@ -45,8 +45,8 @@ const onSubmit = form.handleSubmit((values) => {
   error.value = "";
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/order/${values.id}`
+      const response = await get(
+        `/api/order/${values.id}`
       );
 
       if (response.status == 200) {
@@ -86,7 +86,7 @@ useHead({
       </span>
     </div>
     <Spinner v-show="loading" />
-    
+
     <div v-if="order">
       <div class="flex flex-col space-y-2">
         <div class="flex space-x-2">

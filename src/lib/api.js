@@ -6,5 +6,7 @@ const api = axios.create({
 
 const get = api.get;
 const post = api.post;
+const put = api.put;
+const remove = api.delete;
 
-export { api, get, post };
+export { api, get, post, put, remove };

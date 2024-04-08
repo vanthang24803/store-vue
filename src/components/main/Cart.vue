@@ -1,7 +1,7 @@
 <script setup>
 import { useCartStore } from '@/store/cart';
 import { price, formatPrice } from "@/lib/format"
-import UpdateCart from './UpdateCart.vue';
+import UpdateCart from '../cart/UpdateCart.vue';
 
 import {
     Sheet,

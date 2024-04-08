@@ -120,7 +120,7 @@ onMounted(fetchProfile);
                                 <ShoppingCart class="w-4 h-4 mr-2" />
                                 <div class="flex items-center space-x-2">
                                     <span>Đơn hàng của bạn</span>
-                                    <div class="flex items-center justify-center w-5 h-5 rounded-full text-white bg-red-500 text-sm"
+                                    <div class="flex items-center justify-center w-5 h-5 rounded-full text-white bg-red-500 text-sm animate-bounce"
                                         v-show="totalOrder > 0">
                                         {{ totalOrder }}
                                     </div>

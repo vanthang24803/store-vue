@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { get } from '@/lib/api';
-import Spinner from '../Spinner.vue';
+import Spinner from '../main/Spinner.vue';
 import StarReviews from './StarReviews.vue';
 import Images from './Images.vue';
 import { Separator } from '../ui/separator';

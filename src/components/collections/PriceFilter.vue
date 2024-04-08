@@ -3,7 +3,7 @@ import { Separator } from '@/components/ui/separator'
 import { Label } from '@/components/ui/label'
 import { Check } from 'lucide-vue-next';
 
-const props = defineProps({
+defineProps({
     price: Array,
     selectedPrice: String,
     updateState: Function,

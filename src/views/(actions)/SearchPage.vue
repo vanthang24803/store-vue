@@ -1,13 +1,13 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
-import axios from 'axios';
 import Container from '@/components/ui/Container.vue';
 import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { Separator } from '@/components/ui/separator';
-import Card from '@/components/Card.vue';
+import Card from '@/components/card/Card.vue';
 import Button from '@/components/ui/button/Button.vue';
-import Spinner from '@/components/Spinner.vue';
+import Spinner from '@/components/main/Spinner.vue';
+import { get } from '@/lib/api';
 
 
 const route = useRoute();
@@ -20,7 +20,7 @@ const isLoading = ref(false);
 watchEffect(async () => {
     try {
         isLoading.value = true;
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product?Name=${search}`);
+        const response = await get(`/api/product?Name=${search}`);
         products.value = response.data;
     }
     catch (error) {

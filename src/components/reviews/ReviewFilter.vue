@@ -1,8 +1,8 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
 import { get } from '@/lib/api';
-import Spinner from '../Spinner.vue';
-import BottomPagination from '../BottomPagination.vue';
+import Spinner from '../main/Spinner.vue';
+import BottomPagination from '../main/BottomPagination.vue';
 import Separator from '../ui/separator/Separator.vue';
 import ReviewContent from './ReviewContent.vue';
 import Filter from "./Filter.vue"

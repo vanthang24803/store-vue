@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import Modal from '@/components/Modal.vue';
-import Logo from '@/components/Logo.vue';
+import Modal from '@/components/ui/Modal.vue';
+import Logo from '@/components/main/Logo.vue';
 import { useTitle } from '@vueuse/core'
 import axios from "axios";
 

@@ -14,8 +14,8 @@ import {
 import { price, selects } from "@/constant/index"
 import Container from "@/components/ui/Container.vue";
 import { ChevronRight, Feather } from 'lucide-vue-next';
-import Card from "@/components/Card.vue";
-import PriceFilter from "@/components/PriceFilter.vue";
+import Card from "@/components/card/Card.vue";
+import PriceFilter from "@/components/collections/PriceFilter.vue";
 
 import { RouterLink } from "vue-router";
 import { useHead } from '@unhead/vue'

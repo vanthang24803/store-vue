@@ -1,14 +1,14 @@
 <script setup>
 import { ref, onMounted, watchEffect } from 'vue';
-import axios from 'axios';
-import Card from '@/components/Card.vue';
-import Spinner from "@/components/Spinner.vue";
-import Billboard from '@/components/Billboard.vue';
+import Card from '@/components/card/Card.vue';
+import Spinner from "@/components/main/Spinner.vue";
+import Billboard from '@/components/main/Billboard.vue';
 import Container from '@/components/ui/Container.vue';
-import Categories from '@/components/Categories.vue';
+import Categories from '@/components/main/Categories.vue';
 import { useHead } from '@unhead/vue'
-import BottomPagination from '@/components/BottomPagination.vue';
+import BottomPagination from '@/components/main/BottomPagination.vue';
 import { subBillboard } from "@/constant"
+import { get } from '@/lib/api';
 
 let products = ref([]);
 let isProductLoading = ref(false);
@@ -20,7 +20,7 @@ let totalProducts = ref(0);
 const fetchProducts = async () => {
   try {
     isProductLoading.value = true;
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product?Page=${currentPage.value} `);
+    const response = await get(`/api/product?Page=${currentPage.value} `);
 
     totalProducts.value = response.data.length;
     products.value = response.data.slice((currentPage.value - 1) * 10, currentPage.value * 10)
@@ -46,7 +46,7 @@ const changePage = (number) => {
 onMounted(async () => {
   try {
     isBillboardLoading.value = true;
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/product/billboard`);
+    const response = await get(`/api/product/billboard`);
     billboards.value = response.data;
   }
   catch (error) {

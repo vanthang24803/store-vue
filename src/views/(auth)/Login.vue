@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useHead } from '@unhead/vue'
-import Modal from '@/components/Modal.vue';
-import Logo from '@/components/Logo.vue';
+import Modal from '@/components/ui/Modal.vue';
+import Logo from '@/components/main/Logo.vue';
 
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'

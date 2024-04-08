@@ -1,10 +1,9 @@
 <script setup>
 import { ref, watchEffect, onMounted } from 'vue';
-import axios from 'axios';
 import * as z from 'zod'
 import { Label } from '@/components/ui/label'
 import { useHead } from '@unhead/vue'
-import MobileCart from '@/components/MobileCart.vue';
+import MobileCart from '@/components/cart/MobileCart.vue';
 import { codPrice } from "@/constant"
 import { useCartStore } from '@/store/cart';
 import { ChevronRight } from 'lucide-vue-next';
@@ -22,13 +21,14 @@ import {
 } from '@/components/ui/form'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Input } from '@/components/ui/input'
-import Payment from '@/components/Payment.vue';
+import Payment from '@/components/orders/Payment.vue';
 import { info } from '@/constant';
-import OrderDetail from '@/components/OrderDetail.vue';
+import OrderDetail from '@/components/orders/OrderDetail.vue';
 import { useToast } from '@/components/ui/toast/use-toast'
 import { useAuthStore } from '@/store/auth';
 import Separator from '@/components/ui/separator/Separator.vue';
-import SelectAddress from '@/components/SelectAddress.vue';
+import SelectAddress from '@/components/orders/SelectAddress.vue';
+import { get, post } from '@/lib/api';
 
 
 const { toast } = useToast();
@@ -59,7 +59,7 @@ const form = useForm({
 
 const fetchData = async () => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${auth.user?.id}`,
+        const response = await get(`/api/auth/profile/${auth.user?.id}`,
             { headers: { Authorization: `Bearer ${auth.token}` } }
         );
         profile.value = response.data.profile;
@@ -157,8 +157,8 @@ const onSubmit = form.handleSubmit(async (values) => {
 
     try {
         loading.value = true;
-        const response = await axios.post(
-            `${import.meta.env.VITE_API_URL}/api/order/create`,
+        const response = await post(
+            `/api/order/create`,
             dataSend,
             {
                 headers: {
@@ -205,7 +205,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             <span class="font-bold text-xl tracking-tight">Thông tin giao hàng</span>
 
             <div class="flex items-center space-x-4" v-if="auth.isLogin">
-                <Avatar @click="router.push({path: `/profile/${profile.id}`})">
+                <Avatar @click="router.push({ path: `/profile/${profile.id}` })">
                     <AvatarImage :src="auth.user.avatar" :alt="auth.user.name" />
                     <AvatarFallback>A</AvatarFallback>
                 </Avatar>

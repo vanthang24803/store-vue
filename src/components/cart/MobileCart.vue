@@ -6,7 +6,7 @@ import { ShoppingCart } from 'lucide-vue-next';
 import { useCartStore } from '@/store/cart';
 
 const cart = useCartStore();
-const props = defineProps({
+defineProps({
     ship: Boolean,
     priceCod: Number,
     totalPrice: Number,

@@ -5,7 +5,7 @@ import { useCartStore } from '@/store/cart';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { X } from 'lucide-vue-next';
-import UpdateCart from '@/components/UpdateCart.vue';
+import UpdateCart from '@/components/cart/UpdateCart.vue';
 import { formatPrice, price } from '@/lib/format';
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'

@@ -47,14 +47,14 @@ const cart = useCartStore();
                     </span>
 
                     <div v-if="product.options[0].sale > 0">
-                        <Button size="sm" variant="destructive">
+                        <Button size="sm" variant="destructive" >
                             -{{ product.options[0].sale }}%
                         </Button>
                     </div>
                 </div>
                 <div class="my-2 lg:absolute lg:bottom-4 flex items-center space-x-4"  @click="cart.addItem(product, product.options[0].id, 1)"
                     v-if="product.options[0].quantity > 0">
-                    <div class="w-9 h-9 flex items-center justify-center bg-[#65b10d] rounded-full"
+                    <div class="w-9 h-9 flex items-center justify-center bg-[#65b10d] rounded-full animate-bounce"
                        >
                         <ShoppingCart class="w-5 h-5" />
                     </div>

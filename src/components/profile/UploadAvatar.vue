@@ -68,8 +68,6 @@ const onSubmit = async () => {
       if (response.status == 200) {
         props.fetchData();
         open.value = false;
-        toast.dismiss();
-        toast.success("Avatar updated");
       }
     })
     .catch((error) => {

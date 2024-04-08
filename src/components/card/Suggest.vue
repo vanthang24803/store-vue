@@ -6,7 +6,7 @@ import {
     CarouselNext, CarouselPrevious
 } from
     '@/components/ui/carousel'
-import Card from "@/components/Card.vue";
+import Card from "@/components/card/Card.vue";
 
 const props = defineProps({
     category: String,

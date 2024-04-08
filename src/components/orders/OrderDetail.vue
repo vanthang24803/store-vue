@@ -1,12 +1,12 @@
 <script setup>
 import { useCartStore } from '@/store/cart';
-import { ScrollArea } from './ui/scroll-area';
+import { ScrollArea } from '../ui/scroll-area';
 import { formatPrice, price } from '@/lib/format';
-import { Separator } from './ui/separator';
+import { Separator } from '../ui/separator';
 import { codPrice } from "@/constant"
 
 
-const props = defineProps({
+defineProps({
     ship: Boolean,
     totalPrice: Number,
     priceCod: Number

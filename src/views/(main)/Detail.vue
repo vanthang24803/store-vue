@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import Spinner from "@/components/Spinner.vue"
+import Spinner from "@/components/main/Spinner.vue"
 import { RouterLink } from 'vue-router';
 import { ChevronRight } from 'lucide-vue-next';
-import DetailCard from '@/components/DetailCard.vue';
-import Introduce from '@/components/Introduce.vue';
-import Suggest from "@/components/Suggest.vue"
+import DetailCard from '@/components/card/DetailCard.vue';
+import Introduce from '@/components/card/Introduce.vue';
+import Suggest from "@/components/card/Suggest.vue"
 import { useHead } from '@unhead/vue'
 import { get } from '@/lib/api';
 

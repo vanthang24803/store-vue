@@ -5,11 +5,9 @@ import { Search } from 'lucide-vue-next';
 import { Input } from '@/components/ui/input';
 import { formatPrice } from "@/lib/format"
 import { RouterLink } from 'vue-router';
-import { Separator } from './ui/separator';
-import { useRouter } from 'vue-router'
+import { Separator } from '../ui/separator';
 
 
-const router = useRouter();
 const content = ref('');
 const product = ref([]);
 

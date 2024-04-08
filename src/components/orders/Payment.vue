@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { PaymentType } from '@/constant'
 
-const props = defineProps({
+defineProps({
     payment: String,
     handleBankChange: Function,
 })

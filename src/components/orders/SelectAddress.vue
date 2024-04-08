@@ -8,12 +8,11 @@ import {
     SelectTrigger,
 } from '@/components/ui/select'
 
-const setAddress = ref('');
 const provinces = ref([]);
 const districts = ref([]);
 const wards = ref([]);
 
-const props = defineProps({
+defineProps({
     address: String
 })
 
