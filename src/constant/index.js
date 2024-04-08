@@ -239,3 +239,38 @@ export const statusRankingIcon = {
   Platinum: "/4.png",
   Diamond: "/5.png",
 };
+
+
+export const statusReview = [
+  {
+    name: "Mới nhất",
+    value: "Lasted",
+  },
+  {
+    name: "Có hình ảnh",
+    value: "Image",
+  },
+];
+
+export const starReview = [
+  {
+    name: "5 sao",
+    value: 5,
+  },
+  {
+    name: "4 sao",
+    value: 4,
+  },
+  {
+    name: "3 sao",
+    value: 3,
+  },
+  {
+    name: "2 sao",
+    value: 2,
+  },
+  {
+    name: "1 sao",
+    value: 1,
+  },
+];

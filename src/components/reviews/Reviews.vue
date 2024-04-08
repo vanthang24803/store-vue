@@ -5,6 +5,7 @@ import Spinner from '../Spinner.vue';
 import StarReviews from './StarReviews.vue';
 import Images from './Images.vue';
 import { Separator } from '../ui/separator';
+import ReviewFilter from './ReviewFilter.vue';
 
 const props = defineProps({
    productId: {
@@ -54,6 +55,7 @@ onMounted(fetchReviews)
                <Images :images="images" />
             </div>
             <Separator />
+            <ReviewFilter :id="productId" />
          </div>
 
          <div class="flex items-center justify-center flex-col space-y-3" v-else>
