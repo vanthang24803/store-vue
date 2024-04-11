@@ -10,7 +10,7 @@ import {
   SachMoi,
   TieuThuyet,
   Products,
-  BanChay
+  BanChay,
 } from "@/views/(collections)";
 
 import { Cart, Checkout, Order, SearchPage, TraCuu } from "@/views/(actions)";
@@ -21,6 +21,7 @@ import {
   ProfileOrder,
   Address,
   Register,
+  Verify,
 } from "@/views/(auth)";
 
 import { DefaultLayout, ActionLayout } from "@/layouts";
@@ -170,6 +171,10 @@ const routes = [
             next("/");
           }
         },
+      },
+      {
+        path: "verify-account",
+        component: Verify,
       },
     ],
   },

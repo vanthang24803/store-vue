@@ -1,4 +1,4 @@
-import { post } from "@/lib/api";
+import { get, post } from "@/lib/api";
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("auth", {
@@ -34,6 +34,17 @@ export const useAuthStore = defineStore("auth", {
         console.error("Login failed:", error);
         throw error;
       }
+    },
+    async verifyAccount(userId, token) {
+      get(`/api/auth/verify-account?userId=${userId}&token=${token}`)
+        .then((response) => {
+          this.user = response.data.user;
+          this.token = response.data.token;
+          this.isLogin = true;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     logout() {
       this.user = null;
