@@ -10,7 +10,7 @@ import { ShoppingBasket } from 'lucide-vue-next';
 import { statusList } from '@/constant'
 import { price } from '@/lib/format';
 import { Button } from '@/components/ui/button'
-import { get } from '@/lib/api';
+import { _http } from '@/lib/api';
 
 const orders = ref([]);
 
@@ -20,7 +20,7 @@ const auth = useAuthStore();
 
 const fetchData = async () => {
     try {
-        const response = await get(`/api/order/${route.params.id}/user`,
+        const response = await _http.get(`/api/order/${route.params.id}/user`,
             { headers: { Authorization: `Bearer ${auth.token}` } }
         );
         orders.value = response.data;

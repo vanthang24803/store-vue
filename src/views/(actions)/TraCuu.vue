@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import Spinner from '@/components/main/Spinner.vue';
-import { get } from '@/lib/api';
+import { _http } from '@/lib/api';
 
 let error = ref("");
 let order = ref();
@@ -45,7 +45,7 @@ const onSubmit = form.handleSubmit((values) => {
   error.value = "";
   const fetchData = async () => {
     try {
-      const response = await get(
+      const response = await _http.get(
         `/api/order/${values.id}`
       );
 

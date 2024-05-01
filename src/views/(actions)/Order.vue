@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 import Spinner from '@/components/main/Spinner.vue';
 import { useToast } from '@/components/ui/toast/use-toast'
 import confetti from 'canvas-confetti';
-import { get } from '@/lib/api';
+import { _http } from '@/lib/api';
 
 
 const { toast } = useToast();
@@ -24,7 +24,7 @@ const router = useRouter();
 onMounted(async () => {
     try {
         isLoading.value = true;
-        const response = await get(`/api/order/${route.params.id}`);
+        const response = await _http.get(`/api/order/${route.params.id}`);
         order.value = response.data;
         confetti();
     }

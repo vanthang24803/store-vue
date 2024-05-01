@@ -26,7 +26,7 @@ import { useTitle } from '@vueuse/core';
 import { statusRanking, statusRankingIcon } from '@/constant';
 import { price } from '@/lib/format';
 import Spinner from '@/components/main/Spinner.vue';
-import { get, put } from '@/lib/api';
+import { _http } from '@/lib/api';
 
 
 const formSchema = toTypedSchema(z.object({
@@ -50,7 +50,7 @@ const { toast } = useToast();
 
 const fetchData = async () => {
    try {
-      const response = await get(`/api/auth/profile/${route.params.id}`,
+      const response = await _http.get(`/api/auth/profile/${route.params.id}`,
          { headers: { Authorization: `Bearer ${auth.token}` } }
       );
 
@@ -87,14 +87,8 @@ const handleUpdate = () => {
 const onSubmit = form.handleSubmit(async (values) => {
    try {
       loading.value = true;
-      const response = await put(`/api/auth/profile/${route.params.id}`,
+      const response = await _http.put(`/api/auth/profile/${route.params.id}`,
          values,
-         {
-            headers: {
-               "Content-Type": "application/json",
-               Authorization: `Bearer ${auth.token}`
-            },
-         }
       );
 
       if (response.status == 200) {

@@ -20,10 +20,10 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import UserSvg from "@/components/svg/UserSvg.vue"
-import axios from "axios";
 import { statusRanking, statusRankingIcon } from '@/constant';
 import { price } from "@/lib/format";
 import { calculatePercentage } from "@/lib/ranking"
+import { _http } from "@/lib/api";
 
 
 const auth = useAuthStore();
@@ -38,7 +38,7 @@ let totalOrder = ref(0);
 
 const fetchProfile = async () => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile/${auth.user.id}`,
+        const response = await _http.get(`/api/auth/profile/${auth.user.id}`,
             { headers: { Authorization: `Bearer ${auth.token}` } }
         );
 
@@ -54,8 +54,8 @@ const fetchProfile = async () => {
 }
 
 const fetchOrder = async () => {
-    const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/order/${auth.user?.id}/user`
+    const response = await _http.get(
+        `/api/order/${auth.user?.id}/user`
     );
 
     if (response.status == 200) {
@@ -63,9 +63,12 @@ const fetchOrder = async () => {
     }
 };
 
-onMounted(fetchOrder)
 
-onMounted(fetchProfile);
+onMounted(() => {
+    if (auth.isLogin) {
+        Promise.all([fetchOrder(), fetchProfile()]);
+    }
+});
 
 
 

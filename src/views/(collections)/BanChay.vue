@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useTitle } from '@vueuse/core'
-import { get } from '@/lib/api';
 import Card from '@/components/card/Card.vue';
 import { ChevronRight } from 'lucide-vue-next';
+import { _http } from '@/lib/api';
 
 useTitle("Sách bán chạy - AMAK Store")
 
@@ -11,7 +11,7 @@ const products = ref([])
 
 const fetchProducts = async () => {
    try {
-      const response = await get(`/api/product/selling`);
+      const response = await _http.get(`/api/product/selling`);
 
       if (response.status === 200) {
          products.value = response.data;

@@ -1,11 +1,11 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
-import { get } from '@/lib/api';
 import Spinner from '../main/Spinner.vue';
 import BottomPagination from '../main/BottomPagination.vue';
 import Separator from '../ui/separator/Separator.vue';
 import ReviewContent from './ReviewContent.vue';
 import Filter from "./Filter.vue"
+import { _http } from '@/lib/api';
 
 const props = defineProps({
     id: {
@@ -40,7 +40,7 @@ const fetchReviews = async () => {
             URL += `&Star=${star.value}`;
         }
 
-        const response = await get(URL);
+        const response = await _http.get(URL);
 
         if (response.status === 200) {
             reviews.value = response.data;

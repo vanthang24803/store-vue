@@ -24,6 +24,8 @@ import {
   Verify,
 } from "@/views/(auth)";
 
+import { Blog } from "@/views/(blog)";
+
 import { DefaultLayout, ActionLayout } from "@/layouts";
 
 import { useAuthStore } from "@/store/auth";
@@ -133,6 +135,11 @@ const routes = [
         path: "/product/:id",
         name: "detail",
         component: Detail,
+      },
+      {
+        path: "/blogs",
+        name: "blogs",
+        component: Blog,
       },
     ],
   },

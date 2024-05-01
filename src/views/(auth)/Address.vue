@@ -22,7 +22,7 @@ import {
 import { useForm } from 'vee-validate';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/toast';
-import { get, post, put } from '@/lib/api';
+import { _http } from '@/lib/api';
 
 const formSchema = toTypedSchema(z.object({
   name: z.string().min(1).max(255),
@@ -48,7 +48,7 @@ const toggleCreate = () => {
 
 const fetchData = async () => {
   try {
-    const response = await get(`/api/auth/profile/${route.params.id}/address`,
+    const response = await _http.get(`/api/auth/profile/${route.params.id}/address`,
       { headers: { Authorization: `Bearer ${auth.token}` } }
     );
 
@@ -65,7 +65,7 @@ watchEffect(fetchData)
 
 const onSubmit = form.handleSubmit(async (values) => {
   try {
-    const response = await post(`/api/auth/profile/${route.params.id}/address`, values, {
+    const response = await _http.post(`/api/auth/profile/${route.params.id}/address`, values, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth.token}`,
@@ -86,7 +86,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 
 const activeAddress = async (addressId) => {
   try {
-    const response = await put(`/api/auth/profile/${route.params.id}/address/${addressId}/active`,
+    const response = await _http.put(`/api/auth/profile/${route.params.id}/address/${addressId}/active`,
       {
         headers: {
           "Content-Type": "application/json",

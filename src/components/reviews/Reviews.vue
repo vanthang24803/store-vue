@@ -1,11 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { get } from '@/lib/api';
+
 import Spinner from '../main/Spinner.vue';
 import StarReviews from './StarReviews.vue';
 import Images from './Images.vue';
 import { Separator } from '../ui/separator';
 import ReviewFilter from './ReviewFilter.vue';
+import { _http } from '@/lib/api';
 
 const props = defineProps({
    productId: {
@@ -21,7 +22,7 @@ const fetchReviews = async () => {
    try {
       loading.value = true;
 
-      const response = await get(`/api/product/${props.productId}/review`)
+      const response = await _http.get(`/api/product/${props.productId}/review`)
 
       if (response.status === 200) {
          reviews.value = response.data;

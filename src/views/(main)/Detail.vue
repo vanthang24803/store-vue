@@ -8,18 +8,20 @@ import DetailCard from '@/components/card/DetailCard.vue';
 import Introduce from '@/components/card/Introduce.vue';
 import Suggest from "@/components/card/Suggest.vue"
 import { useHead } from '@unhead/vue'
-import { get } from '@/lib/api';
 
 import { Reviews } from "@/components/reviews"
+import { _http } from '@/lib/api';
+import { decodeSlug } from '@/lib/slug';
 
 const product = ref(null);
 const isLoading = ref(false);
 const route = useRoute();
 
+
 const fetchProduct = async () => {
     try {
         isLoading.value = true;
-        const response = await get(`/api/product/${route.params.id}`);
+        const response = await _http.get(`/api/product/${decodeSlug(route.params.id)}`);
         product.value = response.data;
 
         useHead({
@@ -56,7 +58,7 @@ watch(() => route.params.id, fetchProduct);
 
                     <DetailCard :product="product" />
                     <Introduce v-if="product" :data="product" />
-                    <Reviews :productId="route.params.id" />
+                    <Reviews :productId="`${decodeSlug(route.params.id)}`" />
                     <Suggest :category="product.categories[0].name" />
 
                 </div>

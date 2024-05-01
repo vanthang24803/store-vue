@@ -1,4 +1,4 @@
-import { get, post } from "@/lib/api";
+import { _http } from "@/lib/api";
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("auth", {
@@ -10,17 +10,12 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async login(email, password, router) {
       try {
-        const response = await post(
+        const response = await _http.post(
           `/api/auth/login`,
           {
             email: email,
             password: password,
           },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
         );
 
         if (response.status === 200) {
@@ -36,7 +31,7 @@ export const useAuthStore = defineStore("auth", {
       }
     },
     async verifyAccount(userId, token) {
-      get(`/api/auth/verify-account?userId=${userId}&token=${token}`)
+      _http.get(`/api/auth/verify-account?userId=${userId}&token=${token}`)
         .then((response) => {
           this.user = response.data.user;
           this.token = response.data.token;

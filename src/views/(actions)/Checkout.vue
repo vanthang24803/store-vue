@@ -28,7 +28,7 @@ import { useToast } from '@/components/ui/toast/use-toast'
 import { useAuthStore } from '@/store/auth';
 import Separator from '@/components/ui/separator/Separator.vue';
 import SelectAddress from '@/components/orders/SelectAddress.vue';
-import { get, post } from '@/lib/api';
+import { _http } from '@/lib/api';
 
 
 const { toast } = useToast();
@@ -59,7 +59,7 @@ const form = useForm({
 
 const fetchData = async () => {
     try {
-        const response = await get(`/api/auth/profile/${auth.user?.id}`,
+        const response = await _http.get(`/api/auth/profile/${auth.user?.id}`,
             { headers: { Authorization: `Bearer ${auth.token}` } }
         );
         profile.value = response.data.profile;
@@ -157,7 +157,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 
     try {
         loading.value = true;
-        const response = await post(
+        const response = await _http.post(
             `/api/order/create`,
             dataSend,
             {

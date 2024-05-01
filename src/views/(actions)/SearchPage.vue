@@ -7,7 +7,8 @@ import { Separator } from '@/components/ui/separator';
 import Card from '@/components/card/Card.vue';
 import Button from '@/components/ui/button/Button.vue';
 import Spinner from '@/components/main/Spinner.vue';
-import { get } from '@/lib/api';
+import { _http } from '@/lib/api';
+
 
 
 const route = useRoute();
@@ -20,7 +21,7 @@ const isLoading = ref(false);
 watchEffect(async () => {
     try {
         isLoading.value = true;
-        const response = await get(`/api/product?Name=${search}`);
+        const response = await _http.get(`/api/product?Name=${search}`);
         products.value = response.data;
     }
     catch (error) {
