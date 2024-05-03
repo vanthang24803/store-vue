@@ -3,11 +3,9 @@ import { ref } from 'vue';
 import Modal from '@/components/ui/Modal.vue';
 import Logo from '@/components/main/Logo.vue';
 import { useTitle } from '@vueuse/core'
-import axios from "axios";
 
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
-import * as z from 'zod'
 
 import {
   FormControl,
@@ -20,16 +18,13 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/toast/use-toast'
+import { registerSchema } from '@/schema/auth';
+import { _http } from '@/lib/api';
 
 useTitle('Đăng ký - AMAK Store')
 const { toast } = useToast()
 
-const formSchema = toTypedSchema(z.object({
-  firstName: z.string().min(1).max(50),
-  lastName: z.string().min(1).max(50),
-  email: z.string().min(1).max(255),
-  password: z.string().min(1).max(255),
-}))
+const formSchema = toTypedSchema(registerSchema)
 
 const { handleSubmit } = useForm({
   validationSchema: formSchema,
@@ -41,14 +36,9 @@ const active = ref(false);
 const onSubmit = handleSubmit(async (values) => {
   loading.value = true;
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/auth/register`,
+    const response = await _http.post(
+      `/api/auth/register`,
       values,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
     );
 
     if (response.status === 200) {

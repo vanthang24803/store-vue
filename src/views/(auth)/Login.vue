@@ -6,7 +6,6 @@ import Logo from '@/components/main/Logo.vue';
 
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
-import * as z from 'zod'
 
 import {
     FormControl,
@@ -20,6 +19,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
+import { loginSchema } from '@/schema/auth';
 
 const router = useRouter();
 const auth = useAuthStore();
@@ -28,10 +28,7 @@ useHead({
     title: 'Đăng Nhập - AMAK Store'
 })
 
-const formSchema = toTypedSchema(z.object({
-    email: z.string().min(1).max(255),
-    password: z.string().min(1).max(255),
-}))
+const formSchema = toTypedSchema(loginSchema)
 
 const { handleSubmit } = useForm({
     validationSchema: formSchema,

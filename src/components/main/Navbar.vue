@@ -6,7 +6,7 @@ import Search from "./Search.vue";
 import Cart from "./Cart.vue";
 import Logo from "./Logo.vue";
 import Menu from "./Menu.vue";
-import { LogOut, Settings, ShoppingCart, User } from 'lucide-vue-next';
+import { LogOut, MapPinned, ShoppingCart, User } from 'lucide-vue-next';
 import { useRouter } from "vue-router";
 import { useAuthStore } from '@/store/auth';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -24,6 +24,7 @@ import { statusRanking, statusRankingIcon } from '@/constant';
 import { price } from "@/lib/format";
 import { calculatePercentage } from "@/lib/ranking"
 import { _http } from "@/lib/api";
+import { Settings } from "lucide-vue-next";
 
 
 const auth = useAuthStore();
@@ -71,6 +72,9 @@ onMounted(() => {
 });
 
 
+const isAdmin = auth.user?.role.includes("ADMIN")
+
+
 
 </script>
 
@@ -94,7 +98,10 @@ onMounted(() => {
                         </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent class="w-56">
-                        <DropdownMenuLabel>{{ auth.user.name }}</DropdownMenuLabel>
+                        <DropdownMenuLabel>{{ auth.user.name }} <b v-show="isAdmin"
+                                className="uppercase text-destructive">
+                                - Admin
+                            </b> </DropdownMenuLabel>
                         <DropdownMenuSeparator />
 
                         <div class="flex flex-col text-[12px] p-2 space-y-1">
@@ -129,10 +136,16 @@ onMounted(() => {
                                     </div>
                                 </div>
                             </DropdownMenuItem>
-                            <DropdownMenuItem @click="router.push({ path: `/profile/${auth.user.id}/settings` })">
-                                <Settings class="mr-2 h-4 w-4" />
-                                <span>Cài đặt</span>
+                            <DropdownMenuItem @click="router.push({ path: `/profile/${auth.user.id}/address` })">
+                                <MapPinned class="w-4 h-4 mr-2" />
+                                <span>Địa chỉ</span>
                             </DropdownMenuItem>
+
+                            <DropdownMenuItem v-show="isAdmin" @click="router.push({ path: `/dashboard` })">
+                                <Settings class="mr-2 h-4 w-4" />
+                                <span>Dashboard</span>
+                            </DropdownMenuItem>
+
                             <DropdownMenuItem @click="auth.logout">
                                 <LogOut class="mr-2 h-4 w-4" />
                                 <span>Đăng xuất</span>

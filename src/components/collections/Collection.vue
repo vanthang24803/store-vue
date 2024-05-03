@@ -16,6 +16,7 @@ import { ChevronRight, Check, Feather } from 'lucide-vue-next';
 import Card from "@/components/card/Card.vue";
 
 import { RouterLink } from "vue-router";
+import { Separator } from "../ui/separator";
 
 defineProps({
     category: String,
@@ -36,7 +37,7 @@ defineProps({
         <div className="flex items-center space-x-3 text-sm font-medium">
             <RouterLink to="/">Trang chủ</RouterLink>
             <ChevronRight class="w-4 h-4" />
-            <span>{{ props.category }}</span>
+            <span>{{ category }}</span>
         </div>
         <div className=" lg:flex w-full lg:space-x-12">
             <div className="hidden lg:flex lg:flex-row flex-col space-y-4 lg:space-y-0 my-4">
@@ -51,7 +52,7 @@ defineProps({
                         <div v-for="(item, index) in price" :key="index" className="flex items-center space-x-2">
                             <div className="w-4 h-4 rounded flex items-center justify-center border border-neutral-700"
                                 @click="updateState(item.value)">
-                                <Check v-if="props.selectedPrice === item.value" className="w-4 h-4" />
+                                <Check v-if="selectedPrice === item.value" className="w-4 h-4" />
                             </div>
                             <Label>{{ item.name }}</Label>
                         </div>
@@ -60,7 +61,7 @@ defineProps({
             </div>
 
             <div className="flex flex-col space-y-4">
-                <img :src="props.image" alt="billboard" className="rounded-md" />
+                <img :src="image" alt="billboard" className="rounded-md" />
 
                 <div className="flex space-y-2 flex-col">
                     <div className="flex items-center justify-between">
@@ -69,14 +70,14 @@ defineProps({
                             <h1 className="text-2xl font-bold">Tất cả sản phẩm</h1>
                             <div className="flex items-center space-x-1">
                                 <span className="font-bold">{{
-                                    props.products || 0
+                                    products || 0
                                 }}</span>
                                 <div className="flex items-center justify-between w-full">
                                     <span className="text-sm text-neutral-700">sản phẩm</span>
                                 </div>
                             </div>
                         </div>
-                        <Select v-model="props.selectedFilter" @change="store.updateState(props.selectedPrice, props.selectedFilter)">
+                        <Select v-model="props.selectedFilter" @change="store.updateState(selectedPrice, selectedFilter)">
                             <SelectTrigger class="w-[180px]">
                                 <SelectValue />
                             </SelectTrigger>
@@ -89,15 +90,15 @@ defineProps({
                             </SelectContent>
                         </Select>
                     </div>
-                    <div v-if="props.products > 0" class="grid lg:grid-cols-4 grid-cols-2 gap-4">
-                        <div v-for="(item, index) in props.products" :key="index">
+                    <div v-if="products > 0" class="grid lg:grid-cols-4 grid-cols-2 gap-4">
+                        <div v-for="(item, index) in products" :key="index">
                             <Card :product="item" />
                         </div>
                     </div>
                     <div class="flex items-center justify-center flex-col space-y-5" v-else>
                         <Feather color="#557fc3" class="w-32 h-32" />
                         <h2 class="text-2xl tracking-tight font-medium">Product Not Found</h2>
-                        <Button @click="props.handleReset">Reset</Button>
+                        <Button @click="handleReset">Reset</Button>
                     </div>
                 </div>
             </div>

@@ -5,11 +5,11 @@ import Spinner from "@/components/main/Spinner.vue";
 import Billboard from '@/components/main/Billboard.vue';
 import Container from '@/components/ui/Container.vue';
 import Categories from '@/components/main/Categories.vue';
-import { useHead } from '@unhead/vue'
 import BottomPagination from '@/components/main/BottomPagination.vue';
 import { subBillboard } from "@/constant"
 import { _http } from '@/lib/api';
 import Blog from '@/components/main/Blog.vue';
+import SkeletonLoading from '@/components/loading/SkeletonLoading.vue';
 
 
 let products = ref([]);
@@ -58,9 +58,6 @@ onMounted(async () => {
   }
 });
 
-useHead({
-  title: 'AMAK BOOKS | Sách là bạn'
-})
 
 </script>
 
@@ -84,13 +81,13 @@ useHead({
     <div class="flex flex-col space-y-4">
       <h2 class="text-2xl font-bold tracking-tight uppercase  lg:mt-0">Sản phẩm mới cập nhật</h2>
       <div>
-        <Spinner v-if="isProductLoading" />
-        <div class="flex items-center justify-center flex-col space-y-8" v-else>
+       <SkeletonLoading  v-if="isProductLoading" :items="10" />
+          <div class="flex items-center justify-center flex-col space-y-8" v-else>
           <div class="grid lg:grid-cols-5 grid-cols-2 gap-4 lg:gap-6">
             <Card v-for="product in products" :key="product.id" :product="product" />
           </div>
 
-          <BottomPagination :currentPage="currentPage" :total="totalProducts" :changePage="changePage" />
+          <BottomPagination  :currentPage="currentPage" :total="totalProducts" :changePage="changePage" />
         </div>
       </div>
     </div>

@@ -130,6 +130,10 @@ export const menubar = [
     href: "/collections/phu-kien",
   },
   {
+    title: "Tin tức",
+    href: "/blogs",
+  },
+  {
     title: "Tra cứu đơn hàng",
     href: "/tra-cuu",
   },
