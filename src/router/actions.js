@@ -1,5 +1,5 @@
-import { Order, TraCuu } from "@/views/(actions)";
-import { Login, Register, Verify } from "@/views/(auth)";
+import { Order, TraCuu } from "@/views/actions";
+import { Login, Register, Verify } from "@/views/auth";
 
 import { useAuthStore } from "@/store/auth";
 

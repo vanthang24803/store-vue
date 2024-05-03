@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@unhead/vue": "^1.8.10",
+    "@unovis/ts": "^1.4.0",
+    "@unovis/vue": "^1.4.0",
     "@vee-validate/zod": "^4.12.5",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.6.7",

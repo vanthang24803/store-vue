@@ -8,7 +8,6 @@ useHead({
   title: 'AMAK BOOKS | Sách là bạn'
 })
 
-
 </script>
 
 <template>

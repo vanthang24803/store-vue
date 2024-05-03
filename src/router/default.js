@@ -1,4 +1,4 @@
-import { Home, Detail } from "@/views/(main)";
+import { Home, Detail } from "@/views/main";
 
 import {
   KyNang,
@@ -9,16 +9,16 @@ import {
   TieuThuyet,
   Products,
   BanChay,
-} from "@/views/(collections)";
+} from "@/views/collections";
 
-import { Cart, SearchPage } from "@/views/(actions)";
+import { Cart, SearchPage } from "@/views/actions";
 
-import { Profile, ProfileOrder, Address } from "@/views/(auth)";
+import { Profile, ProfileOrder, Address } from "@/views/auth";
 
 
 import { useAuthStore } from "@/store/auth";
-import BlogDetail from "@/views/(blog)/BlogDetail.vue";
-import Blog from "@/views/(blog)/Blog.vue";
+import BlogDetail from "@/views/blog/BlogDetail.vue";
+import Blog from "@/views/blog/Blog.vue";
 
 const getAuth = () => useAuthStore();
 

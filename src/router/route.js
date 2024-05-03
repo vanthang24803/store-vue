@@ -1,5 +1,5 @@
-import { NotFound } from "@/views/(main)";
-import { Checkout } from "@/views/(actions)";
+import { NotFound } from "@/views/main";
+import { Checkout } from "@/views/actions";
 
 export const route = [
   {
