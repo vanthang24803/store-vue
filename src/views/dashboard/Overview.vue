@@ -22,7 +22,7 @@ import RecentSales from '@/components/dashboard/RecentSales.vue';
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-5 mb-4">
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
@@ -51,7 +51,7 @@ import RecentSales from '@/components/dashboard/RecentSales.vue';
                 </div>
             </ResizablePanel>
         </ResizablePanelGroup>
-
         <RecentSales />
     </div>
+   
 </template>

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/vue-table": "^8.16.0",
     "@unhead/vue": "^1.8.10",
     "@unovis/ts": "^1.4.0",
     "@unovis/vue": "^1.4.0",
@@ -40,6 +41,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@iconify-json/radix-icons": "^1.1.14",
+    "@iconify/vue": "^4.1.2",
     "@vitejs/plugin-vue": "^5.0.3",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.57.0",

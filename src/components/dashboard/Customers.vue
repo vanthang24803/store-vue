@@ -26,7 +26,7 @@ import Spinner from "../main/Spinner.vue";
 import { BarChart } from "lucide-vue-next";
 import { Separator } from "../ui/separator";
 
-const select = ref("day");
+const select = ref("year");
 const loading = ref(false);
 const users = ref();
 
@@ -77,7 +77,7 @@ watchEffect(fetchData)
             </CardDescription>
             <CardContent>
                 <Tabs :default-value="select" @update:model-value="select = $event">
-                    <TabsList className="grid w-full grid-cols-3 bg-neutral-100/80">
+                    <TabsList className="grid w-full grid-cols-3 dark:bg-gray-900/90 bg-neutral-100/80">
                         <TabsTrigger value="day">Day</TabsTrigger>
                         <TabsTrigger value="month">Month</TabsTrigger>
                         <TabsTrigger value="year">Year</TabsTrigger>
