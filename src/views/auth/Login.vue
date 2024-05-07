@@ -20,9 +20,11 @@ import { Input } from '@/components/ui/input'
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
 import { loginSchema } from '@/schema/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from "@/lib/firebase";
 
 const router = useRouter();
-const auth = useAuthStore();
+const authStore = useAuthStore();
 
 useHead({
     title: 'Đăng Nhập - AMAK Store'
@@ -39,7 +41,7 @@ const loading = ref(false);
 const onSubmit = handleSubmit(async (values) => {
     loading.value = true;
     try {
-        await auth.login(values.email, values.password, router);
+        await authStore.login(values.email, values.password, router);
     } catch (error) {
         console.error(error);
     } finally {
@@ -47,6 +49,19 @@ const onSubmit = handleSubmit(async (values) => {
     }
 })
 
+const googleProvider = new GoogleAuthProvider();
+
+
+const loginWithGoogle = async () => {
+    try {
+        const result = await signInWithPopup(auth, googleProvider);
+
+        const token = result._tokenResponse.idToken;
+        await authStore.loginWithGoogle(token, router);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 </script>
 
@@ -68,7 +83,8 @@ const onSubmit = handleSubmit(async (values) => {
                 <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                        <Input type="email" placeholder="Email..." v-bind="componentField" autocomplete="off" :disabled="loading" />
+                        <Input type="email" placeholder="Email..." v-bind="componentField" autocomplete="off"
+                            :disabled="loading" />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -77,20 +93,29 @@ const onSubmit = handleSubmit(async (values) => {
                 <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                        <Input type="password" placeholder="Password..." v-bind="componentField" autocomplete="off" :disabled="loading" />
+                        <Input type="password" placeholder="Password..." v-bind="componentField" autocomplete="off"
+                            :disabled="loading" />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
             </FormField>
-            <Button variant="link" class="flex justify-end" @click="router.push({ path: 'forgot-password' })">Forgot
-                password</Button>
+
+            <span class="flex justify-end text-sm underline cursor-pointer text-neutral-800"
+                @click="router.push({ path: 'forgot-password' })">Forgot
+                password</span>
 
             <Button type="submit" :disabled="loading">
                 Login
             </Button>
-        </form>
 
-        <div class="flex items-center space-x-1 text-sm">
+        </form>
+        <Button @click="loginWithGoogle"
+            class="bg-white hover:bg-white text-black flex items-center justify-center gap-4">
+            <img src="/google.svg" alt="google" class="w-5 h-5 object-fill">
+            <span>Sign In with Google</span>
+        </Button>
+
+        <div class="flex items-center space-x-2 text-sm pt-3">
             <p> No account? </p>
             <RouterLink to="/register" class="text-sm text-sky-500">
                 Create now
