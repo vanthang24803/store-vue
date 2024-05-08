@@ -20,8 +20,13 @@ import { Input } from '@/components/ui/input'
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
 import { loginSchema } from '@/schema/auth';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from "@/lib/firebase";
+import SocialButton from '@/components/main/SocialButton.vue';
+
+import GoogleIcon from "@/assets/google.svg"
+import FacebookIcon from "@/assets/fb.png"
+import GithubIcon from "@/assets/github.png"
+import useSocialLogin from '@/hooks/use-social-login';
+
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -49,19 +54,11 @@ const onSubmit = handleSubmit(async (values) => {
     }
 })
 
-const googleProvider = new GoogleAuthProvider();
-
-
-const loginWithGoogle = async () => {
-    try {
-        const result = await signInWithPopup(auth, googleProvider);
-
-        const token = result._tokenResponse.idToken;
-        await authStore.loginWithGoogle(token, router);
-    } catch (error) {
-        console.log(error);
-    }
-}
+const {
+    loginWithFacebook,
+    loginWithGoogle,
+    loginWithGithub
+} = useSocialLogin();
 
 </script>
 
@@ -109,11 +106,12 @@ const loginWithGoogle = async () => {
             </Button>
 
         </form>
-        <Button @click="loginWithGoogle"
-            class="bg-white hover:bg-white text-black flex items-center justify-center gap-4">
-            <img src="/google.svg" alt="google" class="w-5 h-5 object-fill">
-            <span>Sign In with Google</span>
-        </Button>
+        <div class="flex flex-col space-y-2 py-2">
+            <SocialButton :click="loginWithGoogle" :image="GoogleIcon" provider="google" />
+            <SocialButton :click="loginWithFacebook" :image="FacebookIcon" provider="facebook" />
+
+            <SocialButton :click="loginWithGithub" :image="GithubIcon" provider="github" />
+        </div>
 
         <div class="flex items-center space-x-2 text-sm pt-3">
             <p> No account? </p>

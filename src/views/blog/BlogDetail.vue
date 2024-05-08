@@ -2,9 +2,7 @@
 import Container from '@/components/ui/Container.vue';
 import { useHead } from '@unhead/vue';
 import { useRoute } from 'vue-router';
-import { ref, onMounted, watch } from 'vue';
-import { _http } from '@/lib/api';
-import { decodeSlug } from '@/lib/slug';
+import {  watch } from 'vue';
 
 import {
     Breadcrumb,
@@ -16,21 +14,16 @@ import {
 } from '@/components/ui/breadcrumb';
 
 import Detail from '@/components/blog/Detail.vue';
+import { useQuery } from '@tanstack/vue-query'
+import { fetchBlogDetail } from '@/api/blog';
 
 const route = useRoute();
 
-const blog = ref(null);
+const { data: blog } = useQuery({
+    queryKey: ['blog-detail', route.params.slug],
+    queryFn: () => fetchBlogDetail(route.params.slug)
+})
 
-const fetchBlog = async () => {
-    const res = await _http.get(`/api/blog/${decodeSlug(route.params.slug)}`);
-    if (res.status === 200) {
-        blog.value = res.data;
-    }
-};
-
-onMounted(() => {
-    fetchBlog();
-});
 
 watch(() => {
     useHead({
@@ -60,6 +53,6 @@ watch(() => {
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
-        <Detail :blog="blog" v-show="blog"/>
+        <Detail :blog="blog" v-show="blog" />
     </Container>
 </template>

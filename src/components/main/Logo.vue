@@ -4,6 +4,6 @@ import { RouterLink } from 'vue-router';
 
 <template>
     <RouterLink to="/">
-        <img src="/logo.png" alt="logo" className="w-auto h-10 object-cover">
+        <img src="/logo.png" alt="logo" className="w-auto h-11 object-cover">
     </RouterLink>
 </template>

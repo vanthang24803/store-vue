@@ -1,6 +1,5 @@
 <script setup>
-import { _http } from "@/lib/api";
-import { ref, watchEffect } from "vue";
+import { ref } from "vue";
 import { price } from "@/lib/format";
 import { format } from "date-fns";
 
@@ -25,31 +24,17 @@ import { PartyPopper } from "lucide-vue-next";
 import Spinner from "../main/Spinner.vue";
 import { BarChart } from "lucide-vue-next";
 import { Separator } from "../ui/separator";
+import { useQuery } from "@tanstack/vue-query";
+import { fetchCustomer } from "@/api/overview";
 
-const select = ref("year");
-const loading = ref(false);
-const users = ref();
+const select = ref("day");
 
-const fetchData = async () => {
-    try {
-        loading.value = true;
-        const response = await _http.get(
-            `/api/order/selling?Time=${select.value.charAt(0).toUpperCase() + select.value.slice(1)
-            }`
-        );
+const { isLoading, data: users } = useQuery({
+    queryKey: ['customers', select],
+    queryFn: () => fetchCustomer(select),
+    keepPreviousData: true,
+})
 
-        if (response.status === 200) {
-            users.value = response.data;
-        }
-    } catch (error) {
-        console.log(error);
-    }
-    finally {
-        loading.value = false;
-    }
-}
-
-watchEffect(fetchData)
 
 </script>
 
@@ -77,13 +62,13 @@ watchEffect(fetchData)
             </CardDescription>
             <CardContent>
                 <Tabs :default-value="select" @update:model-value="select = $event">
-                    <TabsList className="grid w-full grid-cols-3 dark:bg-gray-900/90 bg-neutral-100/80">
+                    <TabsList className="grid w-full grid-cols-3 dark:bg-gray-900/90 bg-neutral-200/90">
                         <TabsTrigger value="day">Day</TabsTrigger>
                         <TabsTrigger value="month">Month</TabsTrigger>
                         <TabsTrigger value="year">Year</TabsTrigger>
                     </TabsList>
                     <TabsContent :value="select">
-                        <Spinner v-if="loading" />
+                        <Spinner v-if="isLoading" />
                         <Card v-else class="w-full mt-2">
                             <div class="flex flex-col p-4 gap-4" v-if="users && users.length > 0">
                                 <div class="flex items-center justify-between" v-for="(user, index) in users"
@@ -150,8 +135,8 @@ watchEffect(fetchData)
                                                 )} orders`
                                                 : `${users.reduce(
                                                     (total, user) => total + user.totalOrder,
-                                            0
-                                            )} order`}}
+                                                    0
+                                                )} order` }}
 
                                         </span>
                                     </div>

@@ -1,43 +1,32 @@
 <script setup>
-import { _http } from '@/lib/api';
 import { ChevronRight } from 'lucide-vue-next';
-import { ref, onMounted, watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import Spinner from './Spinner.vue';
 import { useRouter } from 'vue-router';
 import { generateSlug } from "@/lib/slug"
 import { format } from 'date-fns';
 import { vi } from 'date-fns/locale';
+import { useQuery } from '@tanstack/vue-query';
+import { fetchBlogs } from '@/api/blog';
 
-const blogs = ref([]);
-const loading = ref(false);
-const fetchBlogs = async () => {
-  try {
-    loading.value = true;
-    const response = await _http.get(`/api/blog`);
 
-    if (response.status == 200) {
-      blogs.value = response.data;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading.value = false;
-  }
-};
+const { data: blogs, isLoading: loading } = useQuery({
+  queryKey: ['blogs'],
+  queryFn: fetchBlogs
+})
 
 const firstBlog = ref(null);
 const restBlog = ref([]);
 
 
 watchEffect(() => {
-  const [first, ...rest] = blogs.value.slice(0, 4);
-  firstBlog.value = first;
-  restBlog.value = rest;
+  if (blogs.value) {
+    const [first, ...rest] = blogs.value.slice(0, 4);
+    firstBlog.value = first;
+    restBlog.value = rest;
+  }
 });
 
-onMounted(() => {
-  fetchBlogs();
-});
 
 const router = useRouter();
 </script>
@@ -70,8 +59,8 @@ const router = useRouter();
         <div class="md:basis-1/2 w-full flex flex-col space-y-4 lg:space-y-6" v-if="restBlog.length > 0">
           <div class="flex space-x-4 hover:cursor-pointer" v-for="item in restBlog" :key="item.id"
             @click="router.push(`/blogs/${generateSlug(item.title, item.id)}`)">
-            <img :src="item.thumbnail" :alt="item.authorName" width="190"
-              class="rounded-md hover:cursor-pointer" :title="item.title">
+            <img :src="item.thumbnail" :alt="item.authorName" width="190" class="rounded-md hover:cursor-pointer"
+              :title="item.title">
             <div class="flex flex-col">
               <h4 class="font-medium text-[14px] hover:hover:text-[#65b10d]">
                 {{ item.title }}

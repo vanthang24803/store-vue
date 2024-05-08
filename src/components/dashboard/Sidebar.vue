@@ -45,7 +45,7 @@ watch(() => route.fullPath, (newValue) => {
 
 <template>
     <div class="h-full border-r flex flex-col overflow-y-auto shadow-sm light:bg-neutral-50/80">
-        <div class="p-6 h-20 border-b flex items-center">
+        <div class="p-6 h-20 flex items-center justify-center">
             <Logo />
         </div>
         <div class="p-2 rounded" v-for="route in routes" :key="route.name">

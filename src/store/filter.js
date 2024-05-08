@@ -1,5 +1,5 @@
+import { _http } from "@/lib/api";
 import { defineStore } from "pinia";
-import axios from "axios";
 
 export const useCartStore = defineStore("filter", {
   state: () => ({
@@ -14,8 +14,7 @@ export const useCartStore = defineStore("filter", {
       this.price = price;
       this.filter = filter;
 
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/product?Category=${category}&SortBy=${
+      const response = await _http.get(`/api/product?Category=${category}&SortBy=${
           this.price
         }&Filter=${this.filter}`
       );

@@ -8,7 +8,7 @@ const auth = useAuthStore();
 </script>
 
 <template>
-    <nav class="p-4 border-b h-full flex items-center justify-end  light:bg-white  shadow-sm ">
+    <nav class="p-4 border-b h-full flex items-center justify-end bg-white  shadow-sm z-50">
         <div class="flex items-center gap-4">
             <Toggle />
             <Avatar>

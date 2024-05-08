@@ -1,5 +1,8 @@
 import { _http } from "@/lib/api";
 import { defineStore } from "pinia";
+import { useToast } from "@/components/ui/toast/use-toast";
+
+const { toast } = useToast();
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -24,11 +27,16 @@ export const useAuthStore = defineStore("auth", {
         }
       } catch (error) {
         console.error("Login failed:", error);
-        throw error;
+        if (error.response && error.response.status === 400) {
+          toast({
+            title: "Email or password is incorrect!",
+            variant: "destructive",
+          });
+        }
       }
     },
 
-    async loginWithGoogle(token, router) {
+    async loginWithSocial(token, router) {
       try {
         const response = await _http.post(`/api/auth/social?token=${token}`);
 
