@@ -1,8 +1,8 @@
 <script setup>
 
 import { useHead } from "@unhead/vue";
-import Navbar from "@/components/dashboard/Navbar.vue";
-import Sidebar from "@/components/dashboard/Sidebar.vue"
+import Navbar from "@/components/dashboard/overview/Navbar.vue";
+import Sidebar from "@/components/dashboard/overview/Sidebar.vue"
 import { Button } from "@/components/ui/button";
 import { AlertTriangle } from "lucide-vue-next";
 
@@ -21,7 +21,7 @@ useHead({
         <div class="flex h-full w-60 flex-col fixed inset-y-0 z-50">
             <Sidebar />
         </div>
-        <main class="lg:pl-64 pt-24 h-full ">
+        <main class="lg:pl-64 pt-24 px-4">
             <RouterView />
         </main>
     </div>

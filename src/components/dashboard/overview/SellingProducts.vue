@@ -1,8 +1,4 @@
 <script setup>
-import { _http } from "@/lib/api";
-import { ref, watchEffect } from "vue";
-
-
 import {
     Card,
     CardContent,
@@ -21,24 +17,16 @@ import {
 } from '@/components/ui/table'
 
 import { TrendingUp } from "lucide-vue-next";
-import Spinner from "../main/Spinner.vue";
+import Spinner from "@/components/main/Spinner.vue";
+import { useQuery } from "@tanstack/vue-query";
+import { fetchProductSelling } from "@/api/product";
 
-const products = ref([]);
-const loading = ref(false);
 
-const fetchProducts = async () => {
-    loading.value = true;
-    try {
-        const response = await _http.get("/api/product/selling");
-        products.value = response.data;
-    } catch (error) {
-        console.log(error);
-    } finally {
-        loading.value = false;
-    }
-};
 
-watchEffect(fetchProducts);
+const { isLoading: loading, data: products } = useQuery({
+    queryKey: ['selling'],
+    queryFn: () => fetchProductSelling(),
+});
 
 
 </script>

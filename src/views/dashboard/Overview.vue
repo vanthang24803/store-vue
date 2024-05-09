@@ -1,6 +1,6 @@
 <script setup>
-import BarChart from '@/components/dashboard/BarChart.vue';
-import DonutChart from '@/components/dashboard/DonutChart.vue';
+import BarChart from '@/components/dashboard/overview/BarChart.vue';
+import DonutChart from '@/components/dashboard/overview/DonutChart.vue';
 
 import {
     ResizableHandle,
@@ -16,8 +16,8 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import Section from '@/components/dashboard/Section.vue';
-import RecentSales from '@/components/dashboard/RecentSales.vue';
+import Section from '@/components/dashboard/overview/Section.vue';
+import RecentSales from '@/components/dashboard/overview/RecentSales.vue';
 
 </script>
 

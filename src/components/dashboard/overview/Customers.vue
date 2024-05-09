@@ -21,9 +21,9 @@ import {
     CardTitle,
 } from '@/components/ui/card'
 import { PartyPopper } from "lucide-vue-next";
-import Spinner from "../main/Spinner.vue";
+import Spinner from "@/components/main/Spinner.vue";
 import { BarChart } from "lucide-vue-next";
-import { Separator } from "../ui/separator";
+import { Separator } from "@/components/ui/separator";
 import { useQuery } from "@tanstack/vue-query";
 import { fetchCustomer } from "@/api/overview";
 

@@ -16,4 +16,13 @@ const fetchDetailProduct = async (id) => {
   return response.data;
 };
 
-export { fetchProducts, fetchDetailProduct };
+const fetchProductSelling = async () => {
+  try {
+    const response = await _http.get("/api/product/selling");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { fetchProducts, fetchDetailProduct, fetchProductSelling };

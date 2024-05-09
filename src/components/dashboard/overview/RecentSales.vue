@@ -10,6 +10,7 @@ import SellingProducts from './SellingProducts.vue';
 </script>
 
 <template>
+    <div class=""></div>
     <ResizablePanelGroup direction="horizontal">
         <ResizablePanel>
             <SellingProducts />
