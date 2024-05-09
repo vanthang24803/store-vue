@@ -1,6 +1,7 @@
 import { _http } from "@/lib/api";
 import { defineStore } from "pinia";
 import { useToast } from "@/components/ui/toast/use-toast";
+import { jwtDecode } from "jwt-decode";
 
 const { toast } = useToast();
 
@@ -65,6 +66,18 @@ export const useAuthStore = defineStore("auth", {
           console.log(error);
         });
     },
+
+    checkExpiry() {
+      if (this.token) {
+        const decode = jwtDecode(this.token);
+        if (typeof decode !== "string" && decode?.exp) {
+          if (Date.now() >= decode.exp * 1000) {
+            this.logout();
+          }
+        }
+      }
+    },
+
     logout() {
       this.user = null;
       this.token = "";

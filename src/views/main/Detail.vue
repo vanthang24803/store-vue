@@ -1,5 +1,5 @@
 <script setup>
-import { watchEffect, watch } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Spinner from "@/components/main/Spinner.vue"
 import { RouterLink } from 'vue-router';
@@ -11,26 +11,32 @@ import { useHead } from '@unhead/vue'
 
 import { Reviews } from "@/components/reviews"
 import { decodeSlug } from '@/lib/slug';
-import { useQuery } from '@tanstack/vue-query';
 import { fetchDetailProduct } from '@/api/product';
 
+const product = ref(null);
+const isLoading = ref(false);
 const route = useRoute();
 
-const {
-    data: product,
-    isLoading
-} = useQuery({
-    queryKey: ['product', route.params.id],
-    queryFn: () => fetchDetailProduct(route.params.id)
-})
 
-watchEffect(() => {
-    useHead({
-        title: `${product.value.name} | AMAK Store`
-    });
-})
+const fetchProduct = async () => {
+    try {
+        isLoading.value = true;
+        product.value = await fetchDetailProduct(route.params.id);
 
-watch(() => route.params.id, fetchDetailProduct);
+        useHead({
+            title: `${product.value.name} | AMAK Store`
+        });
+    }
+    catch (error) {
+        console.error(error);
+    } finally {
+        isLoading.value = false;
+    }
+};
+
+onMounted(fetchProduct);
+
+watch(() => route.params.id, fetchProduct);
 
 
 </script>
