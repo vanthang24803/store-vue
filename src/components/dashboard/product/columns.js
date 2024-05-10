@@ -16,6 +16,12 @@ export const columns = [
     header: "Brand",
   },
   {
+    accessorKey: "options",
+    header: "Options",
+    cell: ({ row }) =>
+      h("span", { class: "mx-4" }, row.original.options.length),
+  },
+  {
     accessorKey: "createAt",
     header: "Date",
     cell: ({ row }) => h("span", formatDate(row.original.createAt)),
@@ -24,9 +30,7 @@ export const columns = [
     id: "actions",
     cell: ({ row }) =>
       h(CellAction, {
-        props: {
-          id: row.original.id,
-        },
+        id: row.original.id,
       }),
   },
 ];
