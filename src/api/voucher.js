@@ -1,4 +1,4 @@
-import { _http } from "@/lib/api";
+import { _http } from '@/lib/api';
 
 const fetchVouchers = async () => {
   try {

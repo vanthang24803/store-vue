@@ -1,23 +1,23 @@
-import { h } from "vue";
-import CellAction from "../CellAction.vue";
-import { formatDate } from "@/lib/ranking";
+import { h } from 'vue';
+import CellAction from '../CellAction.vue';
+import { formatDate } from '@/lib/ranking';
 
 export const columns = [
   {
-    accessorKey: "id",
-    header: "Id",
+    accessorKey: 'id',
+    header: 'Id',
   },
   {
-    accessorKey: "createAt",
-    header: "Date",
-    cell: ({ row }) => h("span", formatDate(row.original.createAt)),
+    accessorKey: 'createAt',
+    header: 'Date',
+    cell: ({ row }) => h('span', formatDate(row.original.createAt)),
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) =>
       h(CellAction, {
         id: row.original.id,
-        method: "billboards",
+        method: 'billboards',
       }),
   },
 ];

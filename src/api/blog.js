@@ -1,5 +1,5 @@
-import { _http } from "@/lib/api";
-import { decodeSlug } from "@/lib/slug";
+import { _http } from '@/lib/api';
+import { decodeSlug } from '@/lib/slug';
 
 const fetchBlogs = async () => {
   try {

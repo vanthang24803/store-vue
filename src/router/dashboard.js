@@ -5,31 +5,31 @@ import {
   Categories,
   Orders,
   Tickets,
-} from "@/views/dashboard";
+} from '@/views/dashboard';
 
 export const dashboardRoutes = [
   {
-    path: "overview",
+    path: 'overview',
     component: Overview,
   },
   {
-    path: "products",
+    path: 'products',
     component: Products,
   },
   {
-    path: "billboards",
+    path: 'billboards',
     component: Billboards,
   },
   {
-    path: "categories",
+    path: 'categories',
     component: Categories,
   },
   {
-    path: "orders",
+    path: 'orders',
     component: Orders,
   },
   {
-    path: "tickets",
+    path: 'tickets',
     component: Tickets,
   },
 ];

@@ -1,12 +1,12 @@
-import "./assets/index.css";
+import './assets/index.css';
 
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "@/router/index";
-import { createPinia } from "pinia";
-import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
-import { createHead } from "@unhead/vue";
-import { VueQueryPlugin } from "@tanstack/vue-query";
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from '@/router/index';
+import { createPinia } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+import { createHead } from '@unhead/vue';
+import { VueQueryPlugin } from '@tanstack/vue-query';
 
 const head = createHead();
 
@@ -18,4 +18,4 @@ createApp(App)
   .use(router)
   .use(pinia)
   .use(VueQueryPlugin)
-  .mount("#app");
+  .mount('#app');

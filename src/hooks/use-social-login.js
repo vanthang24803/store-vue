@@ -1,14 +1,14 @@
-import { auth } from "@/lib/firebase";
-import { useAuthStore } from "@/store/auth";
+import { auth } from '@/lib/firebase';
+import { useAuthStore } from '@/store/auth';
 import {
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
   GithubAuthProvider,
-} from "firebase/auth";
-import { useRouter } from "vue-router";
+} from 'firebase/auth';
+import { useRouter } from 'vue-router';
 
-import { useToast } from "@/components/ui/toast/use-toast";
+import { useToast } from '@/components/ui/toast/use-toast';
 
 export default function useSocialLogin() {
   const { toast } = useToast();
@@ -28,8 +28,8 @@ export default function useSocialLogin() {
     } catch (error) {
       console.log(error);
       toast({
-        title: "Something went wrong!",
-        variant: "destructive",
+        title: 'Something went wrong!',
+        variant: 'destructive',
       });
     }
   };
@@ -43,8 +43,8 @@ export default function useSocialLogin() {
     } catch (error) {
       console.log(error);
       toast({
-        title: "Something went wrong!",
-        variant: "destructive",
+        title: 'Something went wrong!',
+        variant: 'destructive',
       });
     }
   };
@@ -58,8 +58,8 @@ export default function useSocialLogin() {
     } catch (error) {
       console.log(error);
       toast({
-        title: "Something went wrong!",
-        variant: "destructive",
+        title: 'Something went wrong!',
+        variant: 'destructive',
       });
     }
   };

@@ -1,13 +1,13 @@
-import { computed, ref } from "vue";
+import { computed, ref } from 'vue';
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
 
 const actionTypes = {
-  ADD_TOAST: "ADD_TOAST",
-  UPDATE_TOAST: "UPDATE_TOAST",
-  DISMISS_TOAST: "DISMISS_TOAST",
-  REMOVE_TOAST: "REMOVE_TOAST",
+  ADD_TOAST: 'ADD_TOAST',
+  UPDATE_TOAST: 'UPDATE_TOAST',
+  DISMISS_TOAST: 'DISMISS_TOAST',
+  REMOVE_TOAST: 'REMOVE_TOAST',
 };
 
 let count = 0;
@@ -42,13 +42,13 @@ function dispatch(action) {
     case actionTypes.ADD_TOAST:
       state.value.toasts = [action.toast, ...state.value.toasts].slice(
         0,
-        TOAST_LIMIT,
+        TOAST_LIMIT
       );
       break;
 
     case actionTypes.UPDATE_TOAST:
       state.value.toasts = state.value.toasts.map((t) =>
-        t.id === action.toast.id ? { ...t, ...action.toast } : t,
+        t.id === action.toast.id ? { ...t, ...action.toast } : t
       );
       break;
 
@@ -69,7 +69,7 @@ function dispatch(action) {
               ...t,
               open: false,
             }
-          : t,
+          : t
       );
       break;
     }
@@ -78,7 +78,7 @@ function dispatch(action) {
       if (action.toastId === undefined) state.value.toasts = [];
       else
         state.value.toasts = state.value.toasts.filter(
-          (t) => t.id !== action.toastId,
+          (t) => t.id !== action.toastId
         );
 
       break;

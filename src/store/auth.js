@@ -1,14 +1,14 @@
-import { _http } from "@/lib/api";
-import { defineStore } from "pinia";
-import { useToast } from "@/components/ui/toast/use-toast";
-import { jwtDecode } from "jwt-decode";
+import { _http } from '@/lib/api';
+import { defineStore } from 'pinia';
+import { useToast } from '@/components/ui/toast/use-toast';
+import { jwtDecode } from 'jwt-decode';
 
 const { toast } = useToast();
 
-export const useAuthStore = defineStore("auth", {
+export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
-    token: "",
+    token: '',
     isLogin: false,
   }),
   actions: {
@@ -24,14 +24,14 @@ export const useAuthStore = defineStore("auth", {
           this.token = response.data.token;
           this.isLogin = true;
 
-          router.push({ path: "/" });
+          router.push({ path: '/' });
         }
       } catch (error) {
-        console.error("Login failed:", error);
+        console.error('Login failed:', error);
         if (error.response && error.response.status === 400) {
           toast({
-            title: "Email or password is incorrect!",
-            variant: "destructive",
+            title: 'Email or password is incorrect!',
+            variant: 'destructive',
           });
         }
       }
@@ -46,7 +46,7 @@ export const useAuthStore = defineStore("auth", {
           this.token = response.data.token;
           this.isLogin = true;
 
-          router.push({ path: "/" });
+          router.push({ path: '/' });
         }
       } catch (error) {
         console.error(error);
@@ -70,7 +70,7 @@ export const useAuthStore = defineStore("auth", {
     checkExpiry() {
       if (this.token) {
         const decode = jwtDecode(this.token);
-        if (typeof decode !== "string" && decode?.exp) {
+        if (typeof decode !== 'string' && decode?.exp) {
           if (Date.now() >= decode.exp * 1000) {
             this.logout();
           }
@@ -80,7 +80,7 @@ export const useAuthStore = defineStore("auth", {
 
     logout() {
       this.user = null;
-      this.token = "";
+      this.token = '';
       this.isLogin = false;
 
       window.location.reload();

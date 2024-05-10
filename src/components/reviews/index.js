@@ -1,3 +1,3 @@
-import Reviews from "./Reviews.vue";
+import Reviews from './Reviews.vue';
 
 export { Reviews };

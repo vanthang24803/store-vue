@@ -1,31 +1,31 @@
-import { Order, TraCuu } from "@/views/actions";
-import { Login, Register, Verify } from "@/views/auth";
+import { Order, TraCuu } from '@/views/actions';
+import { Login, Register, Verify } from '@/views/auth';
 
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth';
 
 const getAuth = () => useAuthStore();
 
 export const actionRoutes = [
   {
-    path: "/checkout/:id",
+    path: '/checkout/:id',
     component: Order,
   },
   {
-    path: "/tra-cuu",
+    path: '/tra-cuu',
     component: TraCuu,
   },
   {
-    path: "login",
+    path: 'login',
     component: Login,
     beforeEnter: requireGuest,
   },
   {
-    path: "register",
+    path: 'register',
     component: Register,
     beforeEnter: requireGuest,
   },
   {
-    path: "verify-account",
+    path: 'verify-account',
     component: Verify,
   },
 ];
@@ -35,6 +35,6 @@ function requireGuest(to, from, next) {
   if (!auth.isLogin) {
     next();
   } else {
-    next("/");
+    next('/');
   }
 }

@@ -1,22 +1,22 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
 
-import { DefaultLayout, ActionLayout, DashboardLayout } from "@/layouts";
+import { DefaultLayout, ActionLayout, DashboardLayout } from '@/layouts';
 
-import { defaultRoutes } from "@/router/default";
-import { actionRoutes } from "@/router/actions";
-import { route } from "@/router/route";
-import { dashboardRoutes } from "./dashboard";
+import { defaultRoutes } from '@/router/default';
+import { actionRoutes } from '@/router/actions';
+import { route } from '@/router/route';
+import { dashboardRoutes } from './dashboard';
 
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth';
 
 const getAuth = () => useAuthStore();
 
 const routes = [
   {
-    path: "/",
-    name: "default",
+    path: '/',
+    name: 'default',
     component: DefaultLayout,
-    redirect: "/",
+    redirect: '/',
     children: [
       ...defaultRoutes.map((item) => ({
         path: item.path,
@@ -27,7 +27,7 @@ const routes = [
     ],
   },
   {
-    path: "/",
+    path: '/',
     component: ActionLayout,
     children: [
       ...actionRoutes.map((item) => ({
@@ -38,8 +38,8 @@ const routes = [
     ],
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
+    path: '/dashboard',
+    name: 'Dashboard',
     component: DashboardLayout,
     beforeEnter: requireAdmin,
     children: [
@@ -60,12 +60,12 @@ const routes = [
 
 function requireAdmin(to, from, next) {
   const auth = getAuth();
-  const isAdmin = auth.user?.role.includes("ADMIN");
+  const isAdmin = auth.user?.role.includes('ADMIN');
 
   if (auth.isLogin && isAdmin) {
     next();
   } else {
-    next("/");
+    next('/');
   }
 }
 

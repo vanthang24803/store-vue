@@ -1,10 +1,10 @@
-import slugify from "slugify";
-import { uuidRegex } from "./regex";
+import slugify from 'slugify';
+import { uuidRegex } from './regex';
 
 export const generateSlug = (name, id) => {
   const path = slugify(name, {
     lower: true,
-    locale: "vi",
+    locale: 'vi',
   });
 
   return `${path}-${id}.html`;

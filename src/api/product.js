@@ -1,5 +1,5 @@
-import { _http } from "@/lib/api";
-import { decodeSlug } from "@/lib/slug";
+import { _http } from '@/lib/api';
+import { decodeSlug } from '@/lib/slug';
 
 const fetchProducts = async () => {
   try {
@@ -18,7 +18,7 @@ const fetchDetailProduct = async (id) => {
 
 const fetchProductSelling = async () => {
   try {
-    const response = await _http.get("/api/product/selling");
+    const response = await _http.get('/api/product/selling');
     return response.data;
   } catch (error) {
     console.log(error);
