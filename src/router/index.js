@@ -44,8 +44,7 @@ const routes = [
     beforeEnter: requireAdmin,
     children: [
       ...dashboardRoutes.map((item) => ({
-        path: item.path,
-        name: item.name,
+        path: `/dashboard/${item.path}`,
         component: item.component,
         beforeEnter: item.beforeEnter,
       })),

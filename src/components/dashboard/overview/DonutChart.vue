@@ -1,16 +1,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { fetchDonutChart } from '@/api/overview';
+import { fetchDonutChart } from "@/api/overview";
 
 const chart = ref(null);
 
 onMounted(() => {
-    fetchDonutChart(chart);
-})
-
-
+  fetchDonutChart(chart);
+});
 </script>
 
 <template>
-    <canvas id="donutChart" />
+  <canvas id="donutChart" />
 </template>

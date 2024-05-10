@@ -20,7 +20,7 @@ const { carouselRef, orientation } = useCarousel();
         cn(
           'flex',
           orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
-          props.class
+          props.class,
         )
       "
       v-bind="$attrs"

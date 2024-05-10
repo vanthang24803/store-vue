@@ -1,0 +1,5 @@
+echo "Running build application 💀💀💀💀💀"
+pnpm build
+npx prettier --write "src/**/*.js" "*.vue"
+
+echo "Application build success 👏👏👏👏👏"

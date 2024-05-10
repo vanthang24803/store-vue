@@ -7,14 +7,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { ref , nextTick } from 'vue';
-import axios from 'axios';
-import { useAuthStore } from '@/store/auth';
+import { ref, nextTick } from "vue";
+import axios from "axios";
+import { useAuthStore } from "@/store/auth";
 
 const props = defineProps({
   fetchData: Function,
@@ -35,11 +35,10 @@ const loading = ref(false);
 const handleAvatarClick = () => {
   nextTick(() => {
     if (fileInputRef.value instanceof HTMLElement) {
-      fileInputRef.value.click(); 
+      fileInputRef.value.click();
     }
   });
 };
-
 
 const handleFileChange = (event) => {
   const file = event.target.files?.[0];
@@ -62,7 +61,7 @@ const onSubmit = async () => {
     .post(
       `${import.meta.env.VITE_API_URL}/api/auth/${props.id}/avatar`,
       formData,
-      { headers: { Authorization: `Bearer ${auth.token}` } }
+      { headers: { Authorization: `Bearer ${auth.token}` } },
     )
     .then((response) => {
       if (response.status == 200) {
@@ -78,8 +77,6 @@ const onSubmit = async () => {
     });
 };
 </script>
-
-
 
 <template>
   <Dialog v-model:open="open">
@@ -120,4 +117,3 @@ const onSubmit = async () => {
     </DialogContent>
   </Dialog>
 </template>
-

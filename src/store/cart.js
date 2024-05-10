@@ -20,7 +20,7 @@ export const useCartStore = defineStore("cart", {
             (item.product.options[0].price * item.product.options[0].sale) /
               100) *
             item.quantity,
-        0
+        0,
       );
       return `${price(result)}₫`;
     },
@@ -28,7 +28,7 @@ export const useCartStore = defineStore("cart", {
   actions: {
     addItem(product, optionId, quantity = 1) {
       const item = this.items.find(
-        (i) => i.product.id === product.id && i.optionId === optionId
+        (i) => i.product.id === product.id && i.optionId === optionId,
       );
       if (item) {
         item.quantity += quantity;
@@ -41,7 +41,7 @@ export const useCartStore = defineStore("cart", {
     },
     removeItem(productId, optionId) {
       this.items = this.items.filter(
-        (i) => i.product.id !== productId || i.optionId !== optionId
+        (i) => i.product.id !== productId || i.optionId !== optionId,
       );
 
       toast({
@@ -50,7 +50,7 @@ export const useCartStore = defineStore("cart", {
     },
     updateQuantity(productId, optionId, quantity) {
       const item = this.items.find(
-        (i) => i.product.id === productId && i.optionId === optionId
+        (i) => i.product.id === productId && i.optionId === optionId,
       );
       if (item) {
         item.quantity = quantity;

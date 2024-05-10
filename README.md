@@ -59,6 +59,3 @@ Build Docker Image
 ```
 
 ![image](https://github.com/vanthang24803/store-next-14/assets/101810628/cbe615cf-c696-491a-ac72-4390b772ac52)
-
-
-

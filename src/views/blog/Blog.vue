@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Content from '@/components/blog/Content.vue';
-import Container from '@/components/ui/Container.vue';
+import Content from "@/components/blog/Content.vue";
+import Container from "@/components/ui/Container.vue";
 
 import {
   Breadcrumb,
@@ -9,8 +9,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-
+} from "@/components/ui/breadcrumb";
 </script>
 
 <template>

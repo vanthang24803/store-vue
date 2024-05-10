@@ -28,8 +28,7 @@ const registerSchema = z.object({
     })
     .refine((value) => textRegex.test(value), {
       message: "Chỉ nhập chữ và nhập in hoa chữ cái đầu",
-    })
-    ,
+    }),
   email: z
     .string()
     .min(1, { message: "Email không được bỏ trống" })

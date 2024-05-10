@@ -119,11 +119,10 @@ const fetchBarChart = async (chart) => {
 
 const fetchCustomer = async (select) => {
   try {
-    console.log(select.value)
     const response = await _http.get(
       `/api/order/selling?Time=${
         select.value.charAt(0).toUpperCase() + select.value.slice(1)
-      }`
+      }`,
     );
 
     if (response.status === 200) {
@@ -139,5 +138,5 @@ export {
   fetchTotalRevenue,
   fetchDonutChart,
   fetchBarChart,
-  fetchCustomer
+  fetchCustomer,
 };

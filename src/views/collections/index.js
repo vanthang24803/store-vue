@@ -7,4 +7,13 @@ import PhuKien from "./PhuKien.vue";
 import Products from "./Products.vue";
 import BanChay from "./BanChay.vue";
 
-export { Manga, SachMoi, LightNovel, TieuThuyet, KyNang, PhuKien, Products , BanChay };
+export {
+  Manga,
+  SachMoi,
+  LightNovel,
+  TieuThuyet,
+  KyNang,
+  PhuKien,
+  Products,
+  BanChay,
+};

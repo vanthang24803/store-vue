@@ -1,16 +1,35 @@
-import { Overview , Products } from "@/views/dashboard";
+import {
+  Overview,
+  Products,
+  Billboards,
+  Categories,
+  Orders,
+  Tickets,
+} from "@/views/dashboard";
 
 export const dashboardRoutes = [
   {
-    path: "/dashboard",
-    name: "Dashboard Overview",
+    path: "overview",
     component: Overview,
   },
   {
-    path: "/dashboard/products",
-    name: "Dashboard Products",
+    path: "products",
     component: Products,
   },
+  {
+    path: "billboards",
+    component: Billboards,
+  },
+  {
+    path: "categories",
+    component: Categories,
+  },
+  {
+    path: "orders",
+    component: Orders,
+  },
+  {
+    path: "tickets",
+    component: Tickets,
+  },
 ];
-
-

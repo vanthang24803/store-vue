@@ -1,3 +1,5 @@
+import { format, parseISO } from "date-fns";
+
 const rankingRanges = [
   { start: 0, end: 100000, rank: "Bronze" },
   { start: 100000, end: 500000, rank: "Silver" },
@@ -26,4 +28,9 @@ export const calculatePercentage = (totalPrice) => {
   }
 
   return result;
+};
+
+export const formatDate = (dateString) => {
+  const date = parseISO(dateString);
+  return format(date, "dd/MM/yyyy HH:ss");
 };

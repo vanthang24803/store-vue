@@ -1,6 +1,6 @@
-import { format, parseISO } from "date-fns";
 import { h } from "vue";
 import CellAction from "../CellAction.vue";
+import { formatDate } from "@/lib/ranking";
 
 export const columns = [
   {
@@ -31,11 +31,7 @@ export const columns = [
     cell: ({ row }) =>
       h(CellAction, {
         id: row.original.id,
+        method: "products",
       }),
   },
 ];
-
-const formatDate = (dateString) => {
-  const date = parseISO(dateString);
-  return format(date, "dd/MM/yyyy HH:ss");
-};

@@ -25,7 +25,7 @@ export default defineConfig({
   preview: {
     port: 3000,
     strictPort: true,
-    open: true
+    open: true,
   },
-  ssr: vue
+  ssr: vue,
 });

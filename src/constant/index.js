@@ -244,7 +244,6 @@ export const statusRankingIcon = {
   Diamond: "/5.png",
 };
 
-
 export const statusReview = [
   {
     name: "Mới nhất",

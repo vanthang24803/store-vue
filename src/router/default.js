@@ -15,7 +15,6 @@ import { Cart, SearchPage } from "@/views/actions";
 
 import { Profile, ProfileOrder, Address } from "@/views/auth";
 
-
 import { useAuthStore } from "@/store/auth";
 import BlogDetail from "@/views/blog/BlogDetail.vue";
 import Blog from "@/views/blog/Blog.vue";
@@ -105,7 +104,7 @@ export const defaultRoutes = [
     path: "/blogs/:slug",
     name: "detail-blog",
     component: BlogDetail,
-  }
+  },
 ];
 
 function requireAuth(to, from, next) {
